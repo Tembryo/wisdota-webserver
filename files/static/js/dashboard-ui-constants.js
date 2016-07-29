@@ -346,7 +346,7 @@ var skill_constants = {
             "ordering": 10
         },
     "average-fight-centroid-dist":
-        {   "label": "General Centrality",
+        {   "label": "Teamfight Centrality",
             "explanation": "Measures how close you position yourself to the centre of teamfights.",
             "tips": {
                 "1": "Sometimes it is best to be in the centre of the action.",
@@ -357,7 +357,7 @@ var skill_constants = {
             "ordering": 11
         },
     "average-fight-centroid-dist-team":
-        {   "label": "Team Centrality",
+        {   "label": "Allies Centrality",
             "explanation": "Measures how close you are to the centre of your teammates' location during teamfights.",
             "tips": {
                 "1": "Being close to your teammates can be useful in cases where your opponent does not have AOE spells.",
