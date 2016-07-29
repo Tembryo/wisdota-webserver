@@ -356,7 +356,7 @@ var skill_constants = {
             "format": function(value){return value.toFixed(2);},
             "ordering": 11
         },
-    "average-fight-centroid-dist":
+    "average-fight-centroid-dist-team":
         {   "label": "Team Centrality",
             "explanation": "Measures how close you are to the centre of your teammates' location during teamfights.",
             "tips": {
@@ -435,7 +435,7 @@ var skill_constants = {
             "format": function(value){return value.toFixed(2);},
             "ordering": 1
         },
-    "average-dist-from-centroid":
+    "average-distance-from-centroid":
         {   "label": "Variation in Hero Position",
             "explanation": "Measures the variation in your position in the map - if you move around a lot this number will be high.",
             "tips": {
@@ -480,7 +480,7 @@ var skill_constants = {
             "ordering": 5
         },
     "percentage-stationary-farming":
-        {   "label": "Percentage of Time Moving",
+        {   "label": "Percentage of Time Farming",
             "explanation": "The percentage of time you spent farming.",
             "tips": {
                 "1": "You might want to focus more of your time on farming up, by attaining crucial items and skills earlier in the match you will become more effective.",
