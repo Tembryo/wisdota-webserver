@@ -1,0 +1,67 @@
+<%  layout('base-template'); 
+    navigation_entries=[
+        {"label": "About", "link": "/about"},
+    ];
+-%>
+
+<link href="/static/css/main.css" rel="stylesheet">
+
+<!-- Wisdota Featurette -->
+<div id ="faq">
+    <div class="container">
+        <div class ="row">
+            <hr class="featurette-divider">
+            <div class="col-lg-10 col-lg-offset-1">
+                <h1 class= "text-center">FAQ</h1>
+
+                <h2>What does Wisdota do?</h2>
+                 <p class="lead"> 
+                    Wisdota lets you track your performance in your Dota matches. It uses a machine learning model to rate the level you played at, along with scores for your last hitting, fights and displays this data in the dashboard on your user page.</p>
+                    <p class="lead"> The rating that Wisdota calculates is called an Individual Match Rating (IMR) because it measures your performance in a single match. An IMR of 4000, for example, means that you played at roughly the level of a 4000 MMR player in this particular match. </p>
+                <br>
+                <h2>How do I use it?</h2>
+                 <p class="lead"> 
+                    First sign in via your Steam account - this allows us to fetch a list of recent matches you have played in. Then to request us to analyse one of your matches, simply click on the orange 'Parse' button and we will attempt to download the relevant replay file from the Steam servers and analyse it for you. </p>
+                <br>
+                <h2 >Why would I want to rate my performance?</h2>
+                  <p class="lead"> 
+                    Tracking your performance over time lets you see trends and helps you identify areas in which you can improve. "If you can't measure it, you can't improve it" - Lord Kelvin. 
+                </p>
+                <br>
+                <h2>How accurate is the rating?</h2>
+                  <p class="lead"> 
+                    At the moment the analysis is in a very early state, so the results should definitely be taken with a grain of salt. Stay tuned for coming changes! Your IMR for each match only depends on your individual performance, and not whether your team won or lost. It is calculated independently for each match, whereas your MMR reflects your performance averaged over all of your games.
+                </p>
+                <br>
+                <h2>How does Wisdota work?</h2>
+                  <p class="lead"> 
+                    Your replay files contain a wealth of information on how you play Dota. By training a model on a large number of replays we have identified features of players at the different skill levels (1000-8000+ MMR). Using this model we can map the features in your replay files to an MMR rating along with a rating for your last hitting, fights and more.
+                </p>
+                <br>
+                <h2>Is it free?</h2>
+                  <p class="lead"> 
+                    The basic level features are all available for free, whilst some of the more advanced features will be available on a monthly subscription. See the <a href="/plus">subscription page</a> for further details. 
+                </p>
+                <br>
+                <h2>Can I download my replay files?</h2>
+                  <p class="lead"> 
+                    Yes, if you have requested to have a match analysed the replay file will be available for download. You can download the replay file by going to the match list on your user page and clicking the relevant download icon. 
+                </p>
+                <br>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-lg-1 text-center"> </div>
+            <div class="col-lg-10 text-center">
+                <h1>Contact</h1>
+                  <p class="lead"> 
+                    If you have any further questions or feedback, feel free to contact us via the chat box, or send us a tweet <a href="https://twitter.com/wisdota">@wisdota </a> and we'll do our best to get back to you.                
+                </p>
+                <a href="https://twitter.com/intent/tweet?screen_name=wisdota" class="twitter-mention-button" data-size="large" data-related="wisdota">Tweet to @wisdota</a>
+<script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
+            </div>
+            <div class="col-lg-1 text-center"> </div>
+        </div>
+    </div>
+</div>
+

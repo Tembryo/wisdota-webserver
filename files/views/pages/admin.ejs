@@ -1,0 +1,161 @@
+<% title="Admin Panel ";
+    navigation_entries=[
+    ];
+    layout("base-template") -%>
+
+    <link href="/static/css/admin.css" rel="stylesheet">
+
+<div class="container" >
+    <div class ="row">
+        <div class="col-xs-12 text-center">
+            <h1>Wisdota admin panel</h1>
+        </div>
+        <div class="col-xs-10 col-xs-offset-1">
+            <ul id="main-tabs" class="nav nav-tabs">
+                <li>
+                    <a data-toggle="tab" href="#user-switch">User Switch</a>
+                </li>
+                <li>
+                    <a data-toggle="tab" href="#users">Users</a>
+                </li>
+
+                <li>
+                    <a data-toggle="tab" href="#retrieval-statuses">Retrieval</a>
+                </li>
+                <li>
+                    <a data-toggle="tab" href="#processing-statuses">Processing</a>
+                </li>
+
+               <li>
+                    <a data-toggle="tab" href="#jobs">Jobs</a>
+                </li>
+
+                <li>
+                    <a data-toggle="tab" href="#logs">Logs</a>
+                </li>
+
+                <li>
+                    <a data-toggle="tab" href="#scheduler">Scheduler</a>
+                </li>
+
+                <li>
+                    <a data-toggle="tab" href="#mmr-samples">MMR samples</a>
+                </li>
+                <li>
+                    <a data-toggle="tab" href="#mmr-distribution">MMR distribution</a>
+                </li>
+                <li style="float:right;" ><button id="refresh" type="button" class="btn btn-default dashboard-button"><span class="glyphicon glyphicon-refresh"></span></button></li>
+            </ul>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-xs-10 col-xs-offset-1">
+            <div class="tab-content">
+                <div id="user-switch" class="tab-pane fade">
+                    <h3>Switch the selected user</h3>
+                    <p>Admin account id: <%= user["admin"]%></p>
+                    <p>Current user <b> <%= user["name"]%></b>(ID:<%= user["id"]%>)</p>
+                    <p>Select new user ID: <input id="new-user-id" type="text"> <input id="select-new-user" type="submit" value="Select"></p>
+                    <p>Find user ID by Name: <input id="user-name" type="text"> <input id="find-user" type="submit" value="Search"> <input id="list-all-users" type="submit" value="List All"></p>
+                    <table class="table">
+                        <thead><tr><th>User ID</th><th>Name</th></tr></thead>
+                        <tbody id="user_list"></tbody>
+                    </table>
+                </div>
+                <div id="users" class="tab-pane fade">
+                    <h3>Users</h3>
+                    <p>Number of signed up steam accounts: <span style="font-weight: bold;" id="users-nr"></span></p>
+
+                    <table class="table" id="logins-table">
+                       <thead>
+                            <tr>
+                            </tr>
+                        </thead>
+                        <tbody>
+                        </tbody>
+                    </table>
+                </div>
+
+                <div id="retrieval-statuses" class="tab-pane fade">
+                    <h3>Retrieval requests overview</h3>
+                    <table class="table" id="retrieval-statuses-table">
+                       <thead>
+                            <tr>
+                            </tr>
+                        </thead>
+                        <tbody>
+                        </tbody>
+                    </table>
+                </div>
+                <div id="processing-statuses" class="tab-pane fade">
+                    <h3>Replay files overview</h3>
+                    <table class="table" id="processing-statuses-table">
+                       <thead>
+                            <tr>
+                            </tr>
+                        </thead>
+                        <tbody>
+                        </tbody>
+                    </table>
+                </div>
+                <div id="jobs" class="tab-pane fade">
+                    <h3>Users</h3>
+                   <table class="table" id="jobs-table">
+                       <thead>
+                            <tr>
+                            </tr>
+                        </thead>
+                        <tbody>
+                        </tbody>
+                    </table>
+                </div>
+                <div id="logs" class="tab-pane fade">
+                    <h3>Logs</h3>
+                    <p>Logs for the last minutes <input id="logs-timewindow" type="text"> <input id="logs-by-time" type="submit" value="Get"></p>
+                    <p>Logs for the last minutes <input id="logs-idstart" type="text"><input id="logs-idstop" type="text"> <input id="logs-by-id" type="submit" value="Get"></p>
+                    <table class="table">
+                        <thead><tr><th>ID</th><th>time</th><th>filters</th><th>entry</th></tr></thead>
+                        <tbody id="logs_list"></tbody>
+                    </table>
+                </div>
+
+                <div id="scheduler" class="tab-pane fade">
+                    <h3>Services</h3>
+                    <table class="table">
+                        <thead><tr><th>identifier</th><th>type</th><th>last_heartbeat</th><th>job</th><th>status</th></tr></thead>
+                        <tbody id="services_list"></tbody>
+                    </table>
+                </div>
+
+                <div id="mmr-samples" class="tab-pane fade">
+                    <h3>MMR samples data</h3>
+                    <table class="table" id="mmr-samples-table">
+                       <thead>
+                            <tr>
+                            </tr>
+                        </thead>
+                        <tbody>
+                        </tbody>
+                    </table>
+                </div>
+
+                <div id="mmr-distribution" class="tab-pane fade">
+                    <h3>MMR samples data</h3>
+                    <table class="table" id="mmr-distribution-table">
+                       <thead>
+                            <tr>
+                            </tr>
+                        </thead>
+                        <tbody>
+                        </tbody>
+                    </table>
+                </div>
+
+            </div>
+        </div>
+    </div>
+    <div class="row" style="margin: 0 0 100px 0">
+    </div>
+</div>
+
+<script type="text/javascript" src="/static/js/admin.js"></script>

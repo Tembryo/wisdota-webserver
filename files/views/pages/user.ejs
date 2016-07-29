@@ -1,0 +1,170 @@
+<%  layout('base-template'); 
+    navigation_entries=[
+    ];
+-%>
+    <link href="/static/css/user.css" rel="stylesheet">
+
+<!--User Dasboard -->
+<section id="user-dashboard" class="container-fluid content-section text-center">
+    <div class="row">
+        <div class="col col-xs-10 col-xs-offset-1 text-center">
+            <div id="dashboard" class="svg-container">
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-2"></div>
+        <div class="col-md-8 text-center">
+            <button id="imr-button" type="button" class="btn btn-success dashboard-button">IMR</button>
+            <button id="mechanics-button" type="button" class="btn btn-primary dashboard-button">Mechanics Score</button>
+            <button id="fights-button" type="button" class="btn btn-warning dashboard-button">Item Checks/min</button>
+            <button id="objectives-button" type="button" class="btn btn-info dashboard-button">Avg Check Time</button>
+            <button id="movement-button" type="button" class="btn btn-danger dashboard-button">Last hits</button>
+            <button id="mmr-button" type="button" class="btn btn-default dashboard-button">MMR-Prediction</button>
+        </div>
+        <div class="col-md-2"></div>
+    </div>
+</section>
+
+<section id="announcement-container" class="container content-section" >
+    <div class="row">
+        <div class="col col-xs-10 col-xs-offset-1 text-center">
+            <div id="announcement" style="background-color:#449d44;">
+                We are preparing a new user panel for release, <a href="/dashboard">take a peek</a>. Feedback appreciated!
+            </div>
+        </div>
+    </div>
+</section>
+
+<%
+    if(display_newsletter)
+    {
+%>
+
+<section id="announcement-container" class="container content-section">
+    <div class="row">
+        <div class="col col-xs-10 col-xs-offset-1 text-center">
+            <div id="announcement">
+                Updates and new features? <a href="#newsletter" data-toggle="modal">Sign up to our newsletter!</a>
+            </div>
+        </div>
+    </div>
+</section>
+
+
+<%        
+    }
+%>
+
+<section id="user-container" class="container content-section">
+    <div class="container big-table">
+        <h2>Match List</h2>
+        <table class="table">
+            <thead>
+                <tr>
+                    <th><a style="color:black">Match ID</a></th>
+                    <th><a style="color:black">Date</a></th>
+                    <th><a style="color:black">Time</a></th>
+                    <th><a style="color:black">Hero</a></th>
+                    <th><a style="color:black">Duration</a></th>
+                    <th><a style="color:black">Result</a></th>
+                    <th><a style="color:black">Button</a></th>
+                    <th width="40px"></th>
+                </tr>
+            </thead>
+            <tbody id ="large-match-list">
+
+            </tbody>
+            <tfoot>
+                <tr>
+                    <td colspan="7" style="text-align:center">
+                        <a id="scroll-left" class="glyphicon glyphicon-chevron-left"></a>
+                        <span id="range">1 - 5</span>
+                        <a id="scroll-right" class="glyphicon glyphicon-chevron-right"></a>
+                    </td>
+                </tr>
+            </tfoot>
+        </table>
+    </div>
+
+    <div class="container small-table">
+        <h2>Match List</h2>
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>ID/Result</th>
+                    <th>Date/Time</th>
+                    <th>Hero</th>
+                    <th>Button</th>
+                    <th width="40px"></th>
+                </tr>
+            </thead>
+            <tbody id="small-match-list">
+            </tbody>
+            <tfoot>
+                <tr>
+                    <td colspan="5" style="text-align:center">
+                        <a id="scroll-left" class="glyphicon glyphicon-chevron-left"></a>
+                        <span id="range">1 - 5</span>
+                        <a id="scroll-right" class="glyphicon glyphicon-chevron-right"></a>
+                    </td>
+                </tr>
+            </tfoot>
+        </table>
+    </div>
+</section>
+
+
+<div class="modal fade" id="loading" role="dialog">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 id="my-modal-title">Downloading and Analysing Replay File</h4>
+            </div>
+            <div class="modal-body">
+                <div class="progress">
+                    <div id="progressTimer"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Modal -->
+<div id="newsletter" class="modal fade" role="dialog">
+    <div class="modal-dialog">
+
+    <!-- Modal content-->
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+        <h4 class="modal-title">News! Updates!</h4>
+      </div>
+      <div class="modal-body">
+        <p>We want to keep in touch!<br/>
+        Get notified about changes to the website as soon as they happen by subscribing to our newsletter:</p>
+        <form id="email-form">
+                <input type="text" id="email-address" value="Email address">
+                <input type="button" id="email-button" value="Subscribe">
+        </form>
+        <p id="response"></p>
+
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<script src="/static/js/jquery.progressTimer.js"></script>
+
+<script type="text/javascript">
+    var start = <%=start%>;
+    var range = <%=range%>;
+</script>
+
+<script type="text/javascript" src="/static/js/user.js"></script>
+<script type="text/javascript" src="/static/js/matchlist.js"></script>

@@ -1,0 +1,17 @@
+FROM node:5
+
+COPY wisdota-shared-code /shared-code
+WORKDIR /shared-code
+RUN npm install
+
+COPY wisdota-webserver/src /source
+WORKDIR /source
+RUN npm install
+
+COPY wisdota-webserver/files /files
+
+# expose port of the server
+EXPOSE 42000
+
+# start node with the index.js file of our hello-world application
+CMD ["node", "server.js"]

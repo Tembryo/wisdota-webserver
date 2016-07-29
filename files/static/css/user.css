@@ -1,0 +1,156 @@
+#user-dashboard{
+	margin-top: 40px;
+}
+
+h2 {
+	padding-top: 20px;
+}
+
+
+#dashboard {
+    padding-top: 30vmin;
+}
+
+.dashboard-button {
+	width: 150px;
+}
+
+.dashboard-button-matches {
+	width: 60px;
+}
+
+.circle{
+	display:block;
+	width:25px;
+	height:25px;
+	border-radius:50px;
+	font-size:20px;color:#fff;
+	line-height:100px;
+	text-align:center;
+	text-decoration:none;
+}
+
+#red-circle {
+	background:#d9534f;
+}
+
+#orange-circle {
+	background:#f0ad4e;
+}
+
+#green-circle {
+	background:#5cb85c;
+}
+
+#black-circle {
+	background:#000;
+}
+
+.table > tbody > tr > td {
+     vertical-align: middle;
+}
+
+.image-thumbnail {
+	vertical-align: middle;
+}
+
+.big-table {
+	font-size: 20px;
+}
+
+.small-table {
+	font-size: 16px;
+}
+
+@media screen and (max-width: 640px) {
+	.big-table {
+		display: none;
+	}
+}
+
+
+@media screen and (min-width: 640px) {
+	.small-table {
+		display: none;
+	}
+}
+
+
+.sp {
+  width: 16px;
+  height: 16px;
+  clear: both;
+
+  display:inline-block;
+  vertical-align: middle;
+}
+
+/* Spinner Circle Rotation */
+.sp-circle {
+  border: 4px rgba(0, 0, 0, 0.25) solid;
+  border-top: 4px black solid;
+  border-radius: 50%;
+  -webkit-animation: spCircRot .6s infinite linear;
+  animation: spCircRot .6s infinite linear;
+}
+
+@-webkit-keyframes spCircRot {
+  from {
+    -webkit-transform: rotate(0deg);
+  }
+  to {
+    -webkit-transform: rotate(359deg);
+  }
+}
+@keyframes spCircRot {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(359deg);
+  }
+}
+
+.processing-text
+{
+	display:inline-block;
+	vertical-align: middle;
+	margin-left: 8px;
+}
+
+.disabled
+{
+    pointer-events: none;
+    color: #333;
+}
+
+.tick
+{
+    font-size: 22px;
+}
+
+.label
+{
+   font-size: 22px; 
+}
+
+#announcement
+{
+    padding:10px;
+    margin:20px;
+    font-size: 22;
+    background-color:#d9534f;
+}
+
+#announcement a
+{
+    color: #EEE;
+}
+
+#announcement-green
+{
+    padding:10px;
+    margin:20px;
+    font-size: 22;
+    background-color:#d9534f;
+}

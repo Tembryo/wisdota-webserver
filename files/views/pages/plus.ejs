@@ -1,0 +1,107 @@
+<%  layout('base-template'); 
+    navigation_entries=[
+            {"label": "About", "link": "/about"},
+    ];
+-%>
+
+<link href="/static/css/subscribe.css" rel="stylesheet">
+
+
+<!-- Header -->
+<div class="bg-image-top">
+    <h1 id="tnl">to the next level</h1>
+    <h1 id="tyg">Take your game </h1>
+</div>
+
+<!-- Wisdota Subscriptions -->
+<div id ="subscribe-to-plus">
+    <div class="container text-center">
+        <div class ="row">
+            <div class="col-lg-4 col-md-6 col-sm-6">
+                <div class="subscription-container-basic">
+                    <div class="text-center">
+                        <h1 class="features-heading text-centered">Basic</h1>
+                        <p class="lead"> Identify trends in your match performance and basic stats  </p>
+                        <hr class="primary-thick">   
+                        <h1>Free</h1> 
+                        <button id="free-button" class="btn btn-default btn-lg fat-button" href="/user">Sign Up</button>
+                    </div>
+                    <div style="text-align:left; padding-left:14px">
+                        <hr class="primary-thick">   
+                        <p class="lead"><span class="glyphicon glyphicon-ok"></span> Rate your match performance </p>
+                        <p class="lead"><span class="glyphicon glyphicon-ok"></span> Basic stats and analysis </p>
+                        <p class="lead"><span class="glyphicon glyphicon-remove"></span> No team strategy analysis </p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-4 col-md-6 col-sm-6">
+                <div class="subscription-container-plus text-center">
+                    <div class="text-center">
+                        <h1 class="features-heading text-centered">Plus</h1>
+                        <p class="lead"> Get a detailed analysis of your performance and in-depth stats </p>
+                        <hr class="primary-thick">
+                        <h1>$4.99 per month</h1>
+                        <button class="btn btn-default btn-lg btn-warning active fat-button" data-target= "#newsletter-modal" data-toggle= "modal">Subscribe</button>
+                    </div>
+                    <div style="text-align:left; padding-left:14px">
+                        <hr class="primary-thick">    
+                        <p class="lead"><span class="glyphicon glyphicon-ok"></span> Rate your match performance  </p>
+                        <p class="lead"><span class="glyphicon glyphicon-ok"></span> Detailed analysis of your game </p>
+                        <p class="lead"><span class="glyphicon glyphicon-remove"></span> No team strategy analysis </p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-4 col-md-6 col-sm-6">
+                <div class="subscription-container-gold text-center">
+                    <div class="text-center">
+                        <h1 class="features-heading text-centered">Gold</h1>
+                        <p class="lead"> Turn pro and get tools for analysing and developing team strategies</p>
+                        <hr class="primary-thick">
+                        <h1>$12.99 per month</h1>
+                        <button class="btn btn-default btn-lg default fat-button" data-target= "#newsletter-modal" data-toggle= "modal">In Development</button>
+                    </div>
+                    <div style="text-align:left; padding-left:14px">
+                        <hr class="primary-thick">    
+                        <p class="lead"><span class="glyphicon glyphicon-ok"></span> Rate your match performance</p>
+                        <p class="lead"><span class="glyphicon glyphicon-ok"></span> Detailed analysis of your game </p>
+                        <p class="lead"><span class="glyphicon glyphicon-ok"></span> Team strategy analysis </p>
+                    </div>
+                </div>
+            </div>
+            
+        </div>      
+    </div>
+</div>
+
+<div class="bg-image-bottom">
+    
+</div>
+
+<!-- Modal -->
+<div id="newsletter-modal" class="modal" role="dialog">
+  <div class="modal-dialog">
+
+    <!-- Modal content-->
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+        <h4 class="modal-title">Want it?</h4>
+      </div>
+      <div class="modal-body">
+        <p>The Plus and Gold features will be added in the coming months.<br/>Subscribe to our newsletter to get updates about new releases:</p>
+        <form id="email-form">
+                <input type="text" id="email-address" value="Email address">
+                <input type="button" id="email-button" value="Subscribe">
+        </form>
+        <p id="response"></p>
+
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<script type="text/javascript" src="/static/js/plus.js"></script>
