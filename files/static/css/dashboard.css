@@ -2,17 +2,127 @@ body {
   background: url('/static/img/dashboard/background.jpg') center center;
   background-size: cover;
 }
+
+.intro-header {
+  height: 90px;
+  position: relative;
+  -webkit-background-size: cover;
+  background-size: cover;
+  padding-top: 20px;
+  padding-bottom: 20px;
+  z-index: 3;
+}
+.intro-header .navbar {
+  background: transparent;
+  border: 0;
+  position: relative;
+  z-index: 5;
+  margin-bottom:0;
+}
+.intro-header .navbar-collapse.in,.intro-header .navbar-collapse.collapsing  {
+  background: #333 !important;
+}
+.intro-header .navbar-collapse .navbar-nav li {
+  padding: 15px 10px;
+  margin: 0 15px;
+  margin-bottom:0;
+}
+.intro-header .navbar-collapse .navbar-nav li a {
+  color: #efefef;
+  text-transform: uppercase;
+  padding: 0 0 4px 0;
+  border-bottom: 1px solid rgba(140, 140, 140, 0.5);
+}
+@media (max-width: 992px) {
+  .intro-header .navbar-collapse .navbar-nav li {
+    margin: 0 8px 0 0;
+  }
+}
+.intro-header .navbar-collapse .title1,
+.intro-header .navbar-collapse .title2 {
+  color: white;
+  margin-top: 10px;
+}
+@media (max-width: 992px) {
+  .intro-header .navbar-collapse .title1,
+  .intro-header .navbar-collapse .title2 {
+    font-size: 32px;
+  }
+}
+.intro-header .navbar-collapse .title1 {
+  font-weight: 100;
+}
+.intro-header .navbar-collapse .title2 {
+  font-weight: 300;
+}
+.intro-header .navbar-collapse .navbar-right {
+}
+.intro-header .navbar-collapse .navbar-right #steam-sign-up a {
+  background-color: #818080;
+  padding: 0 26px 0 0;
+  border-bottom-left-radius: 30px;
+  border-bottom-right-radius: 30px;
+  border-top-left-radius: 30px;
+  border-top-right-radius: 30px;
+  display: block;
+  width:130px;
+  margin:0 auto;
+}
+.intro-header .navbar-collapse .navbar-right #steam-sign-up a .fa-steam {
+  vertical-align: middle;
+  background-color: black;
+  padding: 4px;
+  font-size: 18px;
+  border-radius: 100%;
+  margin-right: 16px;
+  position: relative;
+  left:-8px
+}
+.intro-header .bottom {
+  position: absolute;
+  bottom: 30px;
+  text-transform: uppercase;
+  text-align: center;
+  width: 100%;
+  z-index: 5;
+}
+.intro-header .bottom a {
+  color: white;
+}
+.intro-header .bottom .btn-primary {
+  -webkit-box-shadow: 0px 0px 45px 0px rgba(0, 0, 0, 0.35);
+  -moz-box-shadow: 0px 0px 45px 0px rgba(0, 0, 0, 0.35);
+  box-shadow: 0px 0px 45px 0px rgba(0, 0, 0, 0.35);
+  margin-top: 10px;
+  padding: 6px 26px 6px 0;
+  border-bottom-left-radius: 30px;
+  border-bottom-right-radius: 30px;
+  border-top-left-radius: 30px;
+  border-top-right-radius: 30px;
+  background-color: #f1b72a;
+  border-color: #f1b72a;
+  font-size: 18px;
+}
+.intro-header .bottom .btn-primary .fa-steam {
+  vertical-align: middle;
+  padding: 0;
+  font-size: 30px;
+  border-radius: 100%;
+  margin-right: 14px;
+}
+
 .all-matches-table {
   background: #3e4156;
   -webkit-box-shadow: 0px 0px 30px -2px rgba(108, 101, 115, 0.9);
   -moz-box-shadow: 0px 0px 30px -2px rgba(108, 101, 115, 0.9);
   box-shadow: 0px 0px 30px -2px rgba(108, 101, 115, 0.9);
+  border-radius: 10px;
 }
 .all-matches-table .table-wrapper {
   padding: 15px;
 }
 .top-dashboard {
-  margin-top: 100px;
+  margin-top: 50px;
   color: #73798C;
 }
 .top-dashboard .top-table h4 {
