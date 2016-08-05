@@ -243,6 +243,7 @@ canvas {
   -webkit-background-size: cover;
   background-size: cover;
   padding: 40px 0;
+  background-attachment: fixed;
 }
 .intro-content .details .container-fluid {
   color: #f4f4f4;

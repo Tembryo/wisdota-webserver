@@ -27,7 +27,8 @@
 .skill-name
 {
     float:right;
-
+    color:#c9c9db;
+    text-transform: uppercase;
 }
 
 .skill-name:hover
@@ -38,6 +39,7 @@
 .skill-details{
     text-align: left;
     padding-left: 30px;
+    color: #c9c9db;
 }
 
 .skill-score
@@ -53,7 +55,7 @@
 .skill-bar
 {
     height: 25px;
-    background: #DFDCD7;
+    background: #41434D;
 }
 
 .skill-bar-value
@@ -62,12 +64,18 @@
     background: #ec971f;
     height: 25px;
     opacity: 0.55;
+
+    -webkit-transition: .3s all ease-out;
+    -moz-transition: .3s all ease-out;
+    -ms-transition: .3s all ease-out;
+    -o-transition: .3s all ease-out;
+    transition: .3s all ease-out;
 }
 
 .skill-bar-average
 {
     position: absolute;
-    background: #bFbCb7;
+    background: #555963;
     height: 25px;
     opacity: 1;
 }

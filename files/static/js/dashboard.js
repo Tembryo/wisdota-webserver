@@ -878,7 +878,7 @@ function createSkillRow(d)
                                     .attr("class", "row");
     
     var skill_name  = content_row.append("div")
-        .attr("class", "col-xs-4")
+        .attr("class", "col-md-6 col-xs-12")
             .append("span")
             .attr("class", "skill-name");
 
@@ -889,7 +889,7 @@ function createSkillRow(d)
                 .attr("style", "color:"+ d["rating-colour"]);
 
     var bar_container  = content_row.append("div")
-                                    .attr("class", "col-xs-7")
+                                    .attr("class", "col-md-5 col-xs-11")
                                         .append("div")
                                         .attr("style", "width: 100%;")
                                         .attr("class", "skill-bar");

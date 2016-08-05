@@ -380,3 +380,9 @@ body {
 .player-img {
   background: #5B5258;
 }
+
+.tab-pane .stats-container
+{
+  background:#676979;
+  border:5px solid white;
+}
