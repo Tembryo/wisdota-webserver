@@ -56,7 +56,7 @@ canvas {
   position: relative;
   z-index: 5;
 }
-.intro-header .navbar-collapse {
+.intro-header .navbar-collapse.in,.intro-header .navbar-collapse.collapsing  {
   background: #333 !important;
 }
 .intro-header .navbar-collapse .navbar-nav li {
