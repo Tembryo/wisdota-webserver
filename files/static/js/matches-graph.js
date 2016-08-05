@@ -58,7 +58,7 @@ function init_grid()
 	var imrAxisName = new PointText({
 	    content: 'IMR',
 	    fillColor: '#9A9DaD',
-	    fontFamily: 'Courier New',
+	    fontFamily: 'Arial',
 	    fontSize: 14,
 	    fontWeight:'bold'
 	});
@@ -86,7 +86,7 @@ function init_grid()
 		var imrLabel = new PointText({
 		    content: imr_val,
 		    fillColor: '#7A7D9D',
-		    fontFamily: 'Courier New',
+		    fontFamily: 'Arial',
 		    fontSize: 13
 		});
 
