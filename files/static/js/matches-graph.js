@@ -10,6 +10,7 @@ var gridPointGroups = [];
 
 var axisIMR;
 
+
 function setBackground()
 {
 	if(background != undefined && typeof background.remove == 'function') background.remove();

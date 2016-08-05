@@ -157,7 +157,7 @@ body {
 }
 .top-dashboard .actual-table {
   position: relative;
-  height: 344px;
+  max-height: 344px;
   overflow: hidden;
 }
 .match-stats {
