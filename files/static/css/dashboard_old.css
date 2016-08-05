@@ -22,6 +22,7 @@
     height:25px;
     margin: 10px;
     line-height: 25px;
+    clear:both;
 }
 
 .skill-name
@@ -29,6 +30,7 @@
     float:right;
     color:#c9c9db;
     text-transform: uppercase;
+    cursor:pointer;
 }
 
 .skill-name:hover
