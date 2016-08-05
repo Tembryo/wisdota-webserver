@@ -40,7 +40,7 @@ canvas {
   display: none;
 }
 .intro-header {
-  min-height: 750px;
+  height: 720px;
   position: relative;
   background: url('https://placehold.it/1366x768/') no-repeat center;
   -webkit-background-size: cover;
@@ -56,39 +56,42 @@ canvas {
   position: relative;
   z-index: 5;
 }
-.intro-header .navbar .collapse .navbar-nav li {
-  padding: 15px 0;
+.intro-header .navbar-collapse {
+  background: #333 !important;
+}
+.intro-header .navbar-collapse .navbar-nav li {
+  padding: 15px 10px;
   margin: 0 15px;
 }
-.intro-header .navbar .collapse .navbar-nav li a {
+.intro-header .navbar-collapse .navbar-nav li a {
   color: #efefef;
   text-transform: uppercase;
   padding: 0 0 4px 0;
   border-bottom: 1px solid rgba(140, 140, 140, 0.5);
 }
 @media (max-width: 992px) {
-  .intro-header .navbar .collapse .navbar-nav li {
+  .intro-header .navbar-collapse .navbar-nav li {
     margin: 0 8px 0 0;
   }
 }
-.intro-header .navbar .collapse .title1,
-.intro-header .navbar .collapse .title2 {
+.intro-header .navbar-collapse .title1,
+.intro-header .navbar-collapse .title2 {
   color: white;
   margin-top: 10px;
 }
 @media (max-width: 992px) {
-  .intro-header .navbar .collapse .title1,
-  .intro-header .navbar .collapse .title2 {
+  .intro-header .navbar-collapse .title1,
+  .intro-header .navbar-collapse .title2 {
     font-size: 32px;
   }
 }
-.intro-header .navbar .collapse .title1 {
+.intro-header .navbar-collapse .title1 {
   font-weight: 100;
 }
-.intro-header .navbar .collapse .title2 {
+.intro-header .navbar-collapse .title2 {
   font-weight: 300;
 }
-.intro-header .navbar .collapse .navbar-right #steam-sign-up a {
+.intro-header .navbar-collapse .navbar-right #steam-sign-up a {
   background-color: #818080;
   padding: 0 26px 0 0;
   border-bottom-left-radius: 30px;
@@ -96,7 +99,7 @@ canvas {
   border-top-left-radius: 30px;
   border-top-right-radius: 30px;
 }
-.intro-header .navbar .collapse .navbar-right #steam-sign-up a .fa-steam {
+.intro-header .navbar-collapse .navbar-right #steam-sign-up a .fa-steam {
   vertical-align: middle;
   background-color: black;
   padding: 4px;
@@ -351,4 +354,41 @@ canvas {
   color: #a6a6a6;
   font-weight: 500;
   margin-right: 20px;
+}
+
+.mobile-title
+{
+   font-family: 'Roboto', sans-serif;
+  position: absolute;
+  top:0;
+  left:0;
+  width:100%;
+}
+.title1, .title2 {
+color: white;
+margin-top: 10px;
+font-family: 'Roboto' !important;
+}
+
+@media (max-width: 992px) {
+  .title1, .title2
+  {
+    font-size: 24px;
+  }
+}
+
+//title
+
+.title1 {
+  font-weight: 100;
+}
+//title1
+
+.title2 {
+  font-weight: 300;
+}
+
+#bs-example-navbar-collapse-1
+{
+  margin-top:10px;
 }

@@ -15,16 +15,25 @@ $(function(){
 
 			e.preventDefault();
 
+
 			if($("#top-slider").css('visibility') == 'visible')
+			{
+				$("#top-slider").css('display','none');
+	
 				$("#top-slider").css({
 					'visibility':'hidden',
 					'opacity':0
 				});
+			}
 			else
+			{
+				$("#top-slider").css('display','block');
+
 				$("#top-slider").css({
 					'visibility':'visible',
 					'opacity':1
 				});
+			}
 		});
 
 	});
@@ -112,6 +121,8 @@ $(function(){
 				'-o-transition':'all .3s ease',
 			})
 		});
+
+		$("#top-slider").css('display','none');
 	}
 
 	function handle_move()
@@ -129,7 +140,6 @@ $(function(){
 			if($(this).hasClass('slider-card-active')) return;
 
 			var slide_width = $(this).width();
-
 			var slide_nr = parseInt($(this).attr('position'));
 
 			$(this).css({
