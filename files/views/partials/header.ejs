@@ -1,0 +1,107 @@
+<header class="intro-header">
+
+    <% if(page == 'index') { %>
+
+        <div class="canvas-container">
+
+            <div id="canvas-overlay"></div>
+            <canvas id="dota-logo" style="position: relative;"></canvas>
+
+           
+            <div id="top-slider">
+                
+                <i class="fa fa-angle-left" id="move-left" aria-hidden="true"></i>
+                <i class="fa fa-angle-right" id="move-right" aria-hidden="true"></i>
+
+                <div id="top-slider-cards">
+                    <div class="slider-card"></div>
+                    <div class="slider-card"></div>
+                    <div class="slider-card" style="background-image:url(/static/img/landing-page/test-card.png);background-size:cover;background-position:center;"></div>
+                    <div class="slider-card" style="background-image:url(/static/img/landing-page/test-card.png);background-size:cover;background-position:center;"></div>
+                    <div class="slider-card"></div>
+                    <div class="slider-card"></div>
+                    <div class="slider-card slider-card-active" style="background-image:url(/static/img/landing-page/test-card.png);background-size:cover;background-position:center;"></div>
+                    <div class="slider-card"></div>
+                </div>
+
+            </div>
+        
+
+        </div>
+
+    <% } %>
+
+    <nav class="navbar navbar-default">
+        <div class="container-fluid">
+
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse"
+                        data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+            </div> <!-- navbar-header -->
+
+
+            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                <div class="row">
+
+                    <div class="<% if(page == 'index') { %>col-sm-3<% } else { %>col-sm-6<% } %>">
+                        <ul class="nav navbar-nav">
+                            <% if(page == 'dashboard') { %> <li><a href="/">Home</a></li> <% } %>
+                            <li><a href="/about">About Us</a></li>
+                            <li><a href="http://www.patreon.com/wisdota">Support Us</a></li>
+                        </ul> <!-- nav navbar-nav -->
+                    </div>
+
+                    <% if(page == 'dashboard') { %>
+                        <div class="col-sm-3"></div>
+                    <% } %>
+
+                    <% if(page == 'index') { %>
+                        <div class="col-sm-6 hidden-xs">
+                            <h1 class="title1 text-center">Let Artificial Intelligence</h1>
+                            <h1 class="title2 text-center">analyse your Dota game</h1>
+                        </div>
+                    <% } %>
+
+                    <div class="col-sm-2">
+                        <ul class="nav navbar-nav navbar-right">
+                            <li id="steam-sign-up">
+                                <% if (user) { %>
+                                    <a href="/auth/logout"><i class="fa fa-steam"></i>Sign out</a>
+                                <% } else { %>
+                                    <a href="/user"><i class="fa fa-steam"></i>Sign in</a>
+                                <% } %>
+                            </li>
+                        </ul> <!-- nav navbar-nav navbar-right -->
+                    </div>
+
+                </div> <!-- row -->
+            </div> <!-- collapse navbar-collapse -->
+        </div> <!-- container-fluid -->
+    </nav> <!-- navbar navbar-default -->
+
+    <% if(page == 'index') { %>
+
+        <div class="container-fluid mobile-title">
+            <div class="hidden-sm hidden-md hidden-lg col-xs-12">
+                <h1 class="title1 text-center">Let Artificial Intelligence</h1>
+                <h1 class="title2 text-center">analyse your Dota game</h1>
+            </div>
+        </div>
+
+
+        <div class="bottom">
+            <div class="container-fluid">
+                <a href="#" id="view-example">View Example</a>
+                <br>
+                <a href="/user" class="btn btn-primary"><i class="fa fa-steam"></i>Analyse Myself</a>
+            </div> <!-- container-fluid -->
+        </div> <!-- bottom -->
+
+    <% } %>
+
+</header>

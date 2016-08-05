@@ -99,7 +99,7 @@ canvas {
   border-top-left-radius: 30px;
   border-top-right-radius: 30px;
   display: block;
-  width:130px;
+  width:140px;
   margin:0 auto;
 }
 .intro-header .navbar-collapse .navbar-right #steam-sign-up a .fa-steam {
@@ -110,7 +110,7 @@ canvas {
   border-radius: 100%;
   margin-right: 16px;
   position: relative;
-  left:-8px;
+  left:-12px;
 }
 .intro-header .bottom {
   position: absolute;
