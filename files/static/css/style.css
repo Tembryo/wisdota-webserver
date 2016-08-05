@@ -155,8 +155,10 @@ canvas {
 .intro-content .features .container-fluid .left-container {
   background-color: #e4e6e8;
   box-shadow: 0 1px 4px 0 rgba(0, 0, 0, 0.15);
-  min-height: 500px;
   border-radius: 4px;
+}
+.intro-content .features .container-fluid .left-container .tab-pane img{
+   margin:0 auto !important;
 }
 .intro-content .features .container-fluid .right-container {
   margin-top: 20px;
