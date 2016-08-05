@@ -75,9 +75,28 @@ function formatIMR(value)
 
 function initPage()
 {
+    handleAverageSkillsSwitch();
     createCardBase();
     createRatingDivs();
     createTimeline();
+}
+
+function handleAverageSkillsSwitch()
+{
+    $('.skill-bar-average').hide();
+
+    $(document).on('click','#average-switch label',function(){
+
+        var val = $(this).parents('#average-switch').first().data('averages');
+        val = (val == 'off' ? 'on' : 'off');
+        console.log(val);
+
+        $(this).parents('#average-switch').first().data('averages',val);
+
+        if(val == 'on') $('.skill-bar-average').show();
+        else $('.skill-bar-average').hide();
+
+    });
 }
 
 function createCardBase()
@@ -735,6 +754,9 @@ function displayMatch(match)
     renderBars(match);
     renderTips(match);
     renderHeroImages(match);
+
+    if($("#average-switch").data('averages') == 'off')
+        $('.skill-bar-average').hide();
 }
 
 function  clearMatch()
@@ -899,7 +921,6 @@ function createSkillRow(d)
     bar_container.append("div")
         .attr("class", "skill-bar-value")
         .attr("style", "background:"+ d["rating-colour"]);
-
 
     var details_row = row_container.append("div")
                                     .attr("class", "row")
