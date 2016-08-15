@@ -286,6 +286,9 @@ canvas {
   margin-top: 20px;
   max-height: 110px;
   margin-top: -2px;
+      height: auto;
+    min-height: 101px;
+    min-width: 145px;
 }
 .intro-footer .container-fluid .left .left-container .social {
   margin-top: 20px;
@@ -294,7 +297,7 @@ canvas {
 .intro-footer .container-fluid .left .left-container .social a {
   color: #b6b6b6;
   font-size: 28px;
-  margin-right: 40px;
+  margin-right: 23px;
 }
 .intro-footer .container-fluid .left .left-container .social a:hover {
   color: #d98e04;
@@ -385,12 +388,12 @@ font-family: 'Roboto' !important;
   }
 }
 
-//title
+
 
 .title1 {
   font-weight: 100;
 }
-//title1
+
 
 .title2 {
   font-weight: 300;
@@ -400,3 +403,34 @@ font-family: 'Roboto' !important;
 {
   margin-top:10px;
 }
+.text-left{
+  text-align: left;
+}
+.text-right{
+  text-align: right;
+}
+
+footer.copyright{
+  background: #ededed;
+  overflow: hidden;
+  height: 65px;
+
+
+ 
+}
+footer p{
+  margin: 0;
+  margin-top: 10px;
+}
+span.copyright{
+  font-size: 12px;
+}
+
+
+
+
+
+
+
+
+

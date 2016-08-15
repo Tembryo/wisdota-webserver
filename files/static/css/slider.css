@@ -57,3 +57,18 @@
 #top-slider #move-right {
   right: -95px;
 }
+#close-top-slider
+{
+  position: absolute;
+  right: 8px;
+  top: 5px;
+  font-size: 1.8em;
+  color: #333;
+  background: #eee;
+  border-radius: 30px;
+  width: 30px;
+  height: 30px;
+  line-height: 30px;
+  text-align: center;
+  display: block;
+}

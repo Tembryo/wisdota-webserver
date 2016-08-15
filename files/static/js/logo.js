@@ -341,7 +341,7 @@ var animationFinished = false;
 var allowAnimation = false;
 
 function start(){
-
+/*
 	view.onKeyDown = function(e)
 	{
 		var evtobj = window.event ? event : e;
@@ -352,7 +352,7 @@ function start(){
 			save_project();
 		}
 	}
-
+*/
 	view.onMouseMove = function(e)
 	{
 		if(!allowAnimation) return;

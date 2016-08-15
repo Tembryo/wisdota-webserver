@@ -127,6 +127,15 @@ $(function(){
 
 	function handle_move()
 	{
+		$(document).on('click','#close-top-slider',function(){
+			$("#top-slider").css('display','none');
+			
+			$("#top-slider").css({
+				'visibility':'hidden',
+				'opacity':0
+			});
+		});
+
 		$(document).on('click','#move-left',function(){
 			$('.slider-card[position="2"]').click();
 		});
@@ -134,6 +143,17 @@ $(function(){
 		$(document).on('click','#move-right',function(){
 			$('.slider-card[position="3"]').click();
 		});
+
+		var mc = new Hammer(document.getElementById("top-slider"));
+
+		mc.on("swipeleft", function(ev) {
+    		$('.slider-card[position="3"]').click();
+		});
+
+		mc.on("swiperight", function(ev) {
+    		$('.slider-card[position="2"]').click();
+		});
+
 
 		$(document).on('click','.slider-card',function(e){
 
@@ -217,8 +237,9 @@ $(function(){
 				else
 					$(this).removeClass('slider-card-hidden');
 
+			}); // end foreach
 
-			});
+			$("#close-top-slider").appendTo('.slider-card-active');
 
 		});
 	}
