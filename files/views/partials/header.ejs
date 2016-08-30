@@ -1,3 +1,5 @@
+<link href="/static/css/header.css" rel="stylesheet">
+
 <header class="intro-header">
 
     <% if(page == 'index') { %>
@@ -72,15 +74,33 @@
                         </div>
                     <% } %>
 
-                    <div class="col-sm-2">
+                    <div class="col-sm-3">
                         <ul class="nav navbar-nav navbar-right">
-                            <li id="steam-sign-up">
-                                <% if (user) { %>
-                                    <a href="/auth/logout"><i class="fa fa-steam"></i>Sign out</a>
-                                <% } else { %>
-                                    <a href="/user"><i class="fa fa-steam"></i>Sign in</a>
-                                <% } %>
+                            <li>
+                                <div class="login-box">
+                                    <% if (user) { %>
+
+                                        <a href="/user"> 
+                                            <img class="login-avatar" width=30 src="<%= user["avatar"]%>">
+                                        </a>
+                                            <a href="/user"><%= user["name"] %></a>
+
+                                            <a href="/auth/logout" style="margin-left:10px"><i class="fa fa-sign-out "></i></a>
+                                    <% } else { %>
+                                        
+                                        <a href="/user"><i class="fa fa-steam login-steam-icon"></i></a>
+
+                                        <a href="/user"></i>Sign in</a>
+
+                                    <% } %>
+                                </div>
                             </li>
+                        <% if ( user && user["admin"]) { %>
+                            <li>
+                                <a href="/admin"><i class="fa fa-briefcase "></i></a>
+                            </li>
+                        <% } %>
+
                         </ul> <!-- nav navbar-nav navbar-right -->
                     </div>
 
@@ -108,5 +128,4 @@
         </div> <!-- bottom -->
 
     <% } %>
-
 </header>

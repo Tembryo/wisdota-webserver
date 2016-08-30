@@ -47,7 +47,7 @@ passport.deserializeUser(
         async.waterfall(
             [
                 database.generateQueryFunction(
-                        "SELECT u.id, u.name FROM Users u WHERE u.id = $1;",
+                        "SELECT u.id, u.name, steam_object->>'avatar' as avatar FROM Users u WHERE u.id = $1;",
                         [locals.user_id]),
                 function(results, callback)
                 {
@@ -59,6 +59,7 @@ passport.deserializeUser(
 
                     locals.user = { "id":   results.rows[0]["id"],
                                     "name": results.rows[0]["name"],
+                                    "avatar": results.rows[0]["avatar"],
                                     "admin": null,
                                     "statuses": []
                                 };

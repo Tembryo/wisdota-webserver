@@ -78,7 +78,7 @@ router.route("/get-player-matches")
                                 "'null'::json) AS player_stats, "+
                             "COALESCE( (SELECT ms.data FROM MatchStats ms WHERE umh.match_id = ms.id ),"+
                                 "'null'::json) AS match_stats, "+
-                            "COALESCE( (SELECT r.data FROM Results r WHERE umh.match_id = r.match_id AND r.steam_identifier = u.steam_identifier),"+
+                            "COALESCE( (SELECT r.data FROM Results r WHERE umh.match_id = r.match_id AND r.steam_identifier = u.steam_identifier order by id desc limit 1),"+
                                 "'null'::json) AS score_data, "+
                             "COALESCE( (SELECT md.data FROM MatchDetails md WHERE umh.match_id = md.matchid),"+
                                 "'null'::json) AS match_details "+

@@ -1,6 +1,7 @@
 <%  layout('base-template'); 
     navigation_entries=[
     ];
+    page = 'dashboard'; 
 -%>
     <link href="/static/css/dashboard.css" rel="stylesheet">
     <link href="/static/css/playercard.css" rel="stylesheet">
@@ -16,15 +17,11 @@
         }
     </style>
 
-
-<% page = 'dashboard'; %>
-<% include ../partials/header %>
-
 <section class="top-dashboard">
     <div id="user-dashboard">
         <div class="container">
             <div class="row">
-                <div class="col-md-4">
+                <div class="col-md-4  col-xs-12">
 
                     <div class="playercard">
                         <div class="playercardwrapper">
@@ -52,7 +49,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="col-md-8" id="matches-graph-container">
+                <div class="col-md-8 col-xs-12" id="matches-graph-container">
                     <div class="row">
                         <div class="all-matches-table col-md-12">
                             <div class="table-wrapper">
@@ -225,3 +222,8 @@
 <script type="text/javascript" src="/static/js/constants.js"></script>
 <script type="text/javascript" src="/static/js/dashboard-ui-constants.js"></script>
 <script type="text/javascript" src="/static/js/dashboard.js"></script>
+
+<script type="text/javascript">
+    var play_tutorial = true;
+</script>
+<%- include ../partials/tutorial-dashboard.ejs -%>
