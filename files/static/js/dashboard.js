@@ -452,6 +452,19 @@ var reload_interval = 60*1000;
 
 function load(new_data)
 {
+    if(!new_data)
+    {
+        console.log("no data");
+
+        setTimeout(
+            function(){
+                //console.log("reload");
+                reloadMatches(load);
+            },
+            2*reload_interval);
+        return;
+    }
+
     data = new_data;
     average = calculateAverage(data);
 
@@ -1175,7 +1188,9 @@ function loadSettings()
             {
                 settings = data["settings"];
 
-                if(!settings["tutorial-shown"])
+                validateSettings();
+
+                /*if(! (settings["tutorial-shown"] === "true"))
                 {
                     setTimeout(
                         function()
@@ -1185,7 +1200,7 @@ function loadSettings()
                         ,500);
 
                     changeSetting("tutorial-shown", true);
-                }
+                }*/
 
                 updateAverageSwitch();
 
@@ -1193,6 +1208,18 @@ function loadSettings()
                     displayMatch(selected_match_data);
             }
         });
+}
+
+function validateSettings()
+{
+    if(!settings)
+    {
+        settings = {};
+    }
+    if(! ("show-averages" in settings))
+        settings["show-averages"] = "false";
+    if(! ("tutorial-shown" in settings))
+        settings["tutorial-shown"] = "false";
 }
 
 function changeSetting(setting, value)
