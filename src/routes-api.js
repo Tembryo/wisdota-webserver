@@ -42,6 +42,114 @@ function parseRatingsAndSkills(scores, stats)
 }
 
 
+router.route("/get-settings")
+    .get(authentication.ensureAuthenticated,
+        function(req, res)
+        {
+            async.waterfall(
+                [
+                    database.generateQueryFunction("SELECT settings FROM Users WHERE id=$1;", [req.user["id"]]),
+                    function(result, callback)
+                    {
+                        if(result.rowCount != 1)
+                        {
+                            callback("got weird settings", result);
+                            return;
+                        }
+
+                        callback(null, result.rows[0]["settings"]);
+                    }
+                ], 
+                function(err, results)
+                {
+                    if(err)
+                    {
+                        logging.error({"message": "error getting player matches", "err":err, "response": results});
+                        var error_result = {
+                            "result": "error",
+                            "message": err,
+                            "info": results
+                            };
+                        res.json(error_result);
+                        return;
+                    }
+
+                    var success_result = {
+                        "result": "success",
+                        "settings": results
+                        };
+                    res.json(success_result);
+                }
+            );
+        });
+
+router.route("/change-setting")
+    .get(authentication.ensureAuthenticated,
+        function(req, res)
+        {
+            if(!req.query.hasOwnProperty("setting") || !req.query.hasOwnProperty("value"))
+            {   
+                var error_result = {
+                    "result": "error",
+                    "message": "missing query arguments",
+                    "info": req.query
+                    };
+                res.json(error_result);
+                return;
+            }
+
+            async.waterfall(
+                [
+                    database.generateQueryFunction("SELECT settings FROM Users WHERE id=$1;", [req.user["id"]]),
+                    function(result, callback)
+                    {
+                        if(result.rowCount != 1)
+                        {
+                            callback("bad settings result", result);
+                            return;
+                        }
+
+                        var settings = result.rows[0]["settings"];
+                        if(!settings)
+                            settings = {};
+                        settings[req.query["setting"]] = req.query["value"];
+
+                        database.query("UPDATE Users SET settings = $2 WHERE id=$1;", [req.user["id"], settings], callback);
+                    },
+                    function(result, callback)
+                    {
+                        if(result.rowCount != 1)
+                        {
+                            callback("changing setting failed", result);
+                            return;
+                        }
+                        callback();
+                    }
+                ], 
+                function(err, results)
+                {
+                    if(err)
+                    {
+                        var error_result = {
+                            "result": "error",
+                            "message": err,
+                            "info": results
+                            };
+                        res.json(error_result);
+                        return;
+                    }
+
+                    var success_result = {
+                        "result": "success",
+                        "settings": results
+                        };
+                    res.json(success_result);
+                }
+            );
+
+
+        });
+
 
 router.route("/get-player-matches")
     .get(authentication.ensureAuthenticated,
@@ -891,6 +999,35 @@ router.route('/admin-find-user/:name')
             async.waterfall(
                 [
                     database.generateQueryFunction("SELECT id, name FROM Users WHERE name=$1;",[req.params.name])
+                ],
+                function(err, result)
+                {
+                    //console.log(result);
+                    if(err)
+                    {
+                        logging.error({"message": "error find user "+req.params.name, "err": err, "result": result});
+                        
+                        res.json({"users":[]});
+                    }
+                    else
+                        res.json({"users":result.rows});
+                }
+            );
+        }
+    );
+
+router.route('/admin-user-stats')
+    .get(authentication.ensureAuthenticated,
+        authentication.ensureAdmin,
+        function(req, res) 
+        {
+            async.waterfall(
+                [
+                    database.generateQueryFunction("SELECT data->>'user', extract(epoch from time) as time FROM Events WHERE event_type=1 AND (data->'user' IS NOT NULL) ORDER BY time;",[req.params.name]),
+                    function(results, callback)
+                    {
+
+                    }
                 ],
                 function(err, result)
                 {

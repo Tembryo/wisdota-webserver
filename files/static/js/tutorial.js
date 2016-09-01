@@ -15,6 +15,13 @@ function init_tutorial(tutorial)
     d3.select("#tutorial-overlay").style('height', $(document).height()+"px");
     d3.select("#tutorial-overlay").classed("tutorial-overlay-activated", true);
 
+    d3.select("#close-tutorial").on("click",
+        function()
+        {
+            close_tutorial();
+        }
+    );
+
     current_tutorial_step = 0;
     tutorial_shown = true;
     showTutorialStep(current_tutorial_step);

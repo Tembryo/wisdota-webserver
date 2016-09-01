@@ -422,7 +422,7 @@ input.cmn-toggle-round:checked + label:after {
   margin-left: 30px;
 }
 
-#cmn-toggle-1
+#averages-checkbox
 {
     display: none !important;
 }
