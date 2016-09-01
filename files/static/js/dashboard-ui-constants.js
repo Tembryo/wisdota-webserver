@@ -378,8 +378,19 @@ var skill_constants = {
             "format": function(value){return value.toFixed(2);},
             "ordering": 13
         },
-    "fight-right-click-damage":
+    "total-right-click-damage":
         {   "label": "Right-Click Damage",
+            "explanation": "The total amount of damage you did with right-clicks.",
+            "tips": {
+                "1": "Some heroes just need to hit.",
+                "-1": "Care less about hitting and focus on using spells."
+            },
+            "fixed_direction": 1,
+            "format": function(value){return value.toFixed(2);},
+            "ordering": 14
+        },
+    "fight-right-click-damage":
+        {   "label": "Fight Right-Click Damage",
             "explanation": "The total amount of damage you did with right-clicks during fights.",
             "tips": {
                 "1": "Get more right-clicks on the enemy by moving and cancelling the attack animation.",
@@ -389,8 +400,19 @@ var skill_constants = {
             "format": function(value){return value.toFixed(2);},
             "ordering": 14
         },
+    "total-spell-damage":
+        {   "label": "Total Spell Damage",
+            "explanation": "The total amount of damage you did with spells.",
+            "tips": {
+                "1": "Use your spells, they define your hero.",
+                "-1": "?"
+            },
+            "fixed_direction": 1,
+            "format": function(value){return value.toFixed(2);},
+            "ordering": 15
+        },
     "fight-spell-damage":
-        {   "label": "Spell Damage",
+        {   "label": "Fight Spell Damage",
             "explanation": "The total amount of damage you did with spells during fights.",
             "tips": {
                 "1": "Look to use your spells more often during fights. <br/> By optimising the sequence of spells you use you may be able to use more than you think.",
@@ -479,6 +501,17 @@ var skill_constants = {
             "format": function(value){return value.toFixed(2);},
             "ordering": 5
         },
+    "percentage-stationary":
+        {   "label": "Percentage of Time Stationary",
+            "explanation": "The percentage of time you spent staying in the same place.",
+            "tips": {
+                "1": "Try to move around less, you might need to focus on other things.",
+                "-1": "You should probably move around more."
+            },
+            "fixed_direction": 0,
+            "format": function(value){return value.toFixed(2);},
+            "ordering": 6
+        },
     "percentage-stationary-farming":
         {   "label": "Percentage of Time Farming",
             "explanation": "The percentage of time you spent farming.",
@@ -488,7 +521,7 @@ var skill_constants = {
             },
             "fixed_direction": 0,
             "format": function(value){return value.toFixed(2);},
-            "ordering": 6
+            "ordering": 7
         },
     "percentage-stationary-fighting":
         {   "label": "Percentage of Time Fighting",
@@ -499,7 +532,131 @@ var skill_constants = {
             },
             "fixed_direction": 0,
             "format": function(value){return value.toFixed(2);},
+            "ordering": 8
+        },
+    "time-visible":
+        {   "label": "Time Visible",
+            "explanation": "Total time you were visible to the enemy.",
+            "tips": {
+                "1": "You need to be more active showing on lanes.",
+                "-1": "Maybe you should play more off the map and not show yourself to enemies."
+            },
+            "fixed_direction": 0,
+            "format": function(value){return value.toFixed(2);},
+            "ordering": 9
+        },
+    "total-distance-traveled":
+        {   "label": "Distance Traveled",
+            "explanation": "Total distance your hero covered over the game.",
+            "tips": {
+                "1": "Move around more, action is always happening on different parts of the map.",
+                "-1": "You might want to spend less time moving around."
+            },
+            "fixed_direction": 0,
+            "format": function(value){return value.toFixed(2);},
+            "ordering": 10
+        },
+    "total-time-alive":
+        {   "label": "Time Alive",
+            "explanation": "Total time your hero was alive.",
+            "tips": {
+                "1": "Dying is bad.",
+                "-1": "Sometimes you have to die for the team."
+            },
+            "fixed_direction": 0,
+            "format": function(value){return value.toFixed(2);},
+            "ordering": 11
+        },
+
+    // Other Skills
+
+    "num-observer-wards-placed":
+        {   "label": "Oberserver Wards",
+            "explanation": "Number of observer wards you placed.",
+            "tips": {
+                "1": "Make sure to always keep wards up.",
+                "-1": "Maybe you should have the other support do the warding."
+            },
+            "fixed_direction": 0,
+            "format": function(value){return value.toFixed(2);},
+            "ordering": 0
+        },
+    "num-sentry-wards-placed":
+        {   "label": "Sentry Wards",
+            "explanation": "Number of sentry wards you placed.",
+            "tips": {
+                "1": "Make sure to place sentries against invisible enemies.",
+                "-1": "Maybe you should be more careful with your sentries."
+            },
+            "fixed_direction": 0,
+            "format": function(value){return value.toFixed(2);},
+            "ordering": 1
+        },
+    "num-tp-bought":
+        {   "label": "TP Scrolls Bought",
+            "explanation": "Number of TP scrolls you bought.",
+            "tips": {
+                "1": "Always gotta keep a TP.",
+                "-1": "Maybe, just maybe, you are buying too many TPs."
+            },
+            "fixed_direction": 0,
+            "format": function(value){return value.toFixed(2);},
+            "ordering": 2
+        },
+    "num-of-tp-used":
+        {   "label": "TP Scrolls Used",
+            "explanation": "Number of TP scrolls you used.",
+            "tips": {
+                "1": "There are many different scenarios when you should use a TP.",
+                "-1": "You might want to be a bit more careful with your TPs."
+            },
+            "fixed_direction": 0,
+            "format": function(value){return value.toFixed(2);},
+            "ordering": 3
+        },
+    "total-tp-distance":
+        {   "label": "Total TP Distance",
+            "explanation": "Total distance you traveled using TPs.",
+            "tips": {
+                "1": "Be efficient!",
+                "-1": ""
+            },
+            "fixed_direction": 0,
+            "format": function(value){return value.toFixed(2);},
+            "ordering": 4
+        },
+
+    "roshan-damage":
+        {   "label": "Roshan Damage",
+            "explanation": "Total damage you dealt to Roshan.",
+            "tips": {
+                "1": "Remember to kill Rosh when you can!",
+                "-1": "Be careful when trying to kill Rosh."
+            },
+            "fixed_direction": 0,
+            "format": function(value){return value.toFixed(2);},
+            "ordering": 5
+        },
+    "tower-damage":
+        {   "label": "Tower Damage",
+            "explanation": "Total damage you dealt to towers.",
+            "tips": {
+                "1": "Killing buildings wins games!",
+                "-1": "Maybe you have the wrong hero to walk up and hit towers."
+            },
+            "fixed_direction": 0,
+            "format": function(value){return value.toFixed(2);},
+            "ordering": 6
+        },
+    "rax-damage":
+        {   "label": "Barracks Damage",
+            "explanation": "Total damage you dealt to barracks.",
+            "tips": {
+                "1": "Killing buildings wins games!",
+                "-1": "Maybe you have the wrong hero to walk up and hit barracks."
+            },
+            "fixed_direction": 0,
+            "format": function(value){return value.toFixed(2);},
             "ordering": 7
         }
-
 };

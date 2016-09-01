@@ -125,6 +125,12 @@ body {
   margin-top: 50px;
   color: #73798C;
 }
+
+.top-table {
+  padding-left: 15px;
+  padding-right: 15px;
+}
+
 #matches-graph-container .top-table h4 {
   margin-top: 12px;
   margin-bottom: 0px;

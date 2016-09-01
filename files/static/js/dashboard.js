@@ -1190,7 +1190,7 @@ function loadSettings()
 
                 validateSettings();
 
-                /*if(! (settings["tutorial-shown"] === "true"))
+                if(! (settings["tutorial-shown"] === "true"))
                 {
                     setTimeout(
                         function()
@@ -1200,7 +1200,7 @@ function loadSettings()
                         ,500);
 
                     changeSetting("tutorial-shown", true);
-                }*/
+                }
 
                 updateAverageSwitch();
 
