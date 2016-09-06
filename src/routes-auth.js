@@ -10,7 +10,14 @@ var	config		= require("/shared-code/config.js"),
     database    = require("/shared-code/database.js");
 
 var host = process.env.VIRTUAL_HOST.split(",")[0];
-var steam_realm   = "http://"+host+":80/";
+
+var outside_port;
+if (process.env.OUTSIDE_PORT)
+    outside_port = process.env.OUTSIDE_PORT;
+else
+    outside_port = 80;
+
+var steam_realm   = "http://"+host+":"+outside_port+"/";
 
 // Passport session setup.
 //   To support persistent login sessions, Passport needs to be able to
