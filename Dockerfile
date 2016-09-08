@@ -13,5 +13,5 @@ WORKDIR /source
 # expose port of the server
 EXPOSE 42000
 
-# start node with the index.js file of our hello-world application
+# start node server
 CMD ["node", "server.js"]

@@ -146,31 +146,6 @@ router.get('/user',
     }
 );
 
-router.get('/user-example',
-    function(req, res)
-    {
-        var data = collectTemplatingData(req);
-        if(req.query.hasOwnProperty("start") && req.query.hasOwnProperty("end"))
-        {
-            data["start"] =  parseInt(req.query["start"]);
-            data["range"] =  parseInt(req.query["end"]) - parseInt(req.query["start"]);
-        }
-        else if(req.query.hasOwnProperty("start"))
-        {
-            data["start"] =  req.query["start"];
-            data["range"] =  5;
-        }
-        else
-        {
-            data["start"] =  0;
-            data["range"] =  5;
-        }
-
-        res.render("pages/dashboard-example.ejs", data);
-    }
-);
-
-
 router.get('/result', function(req, res)
 {
     var data = collectTemplatingData(req);

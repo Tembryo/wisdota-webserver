@@ -1,0 +1,30 @@
+.login-box {
+  background-color: #818080;
+  padding: 0 26px 0 0;
+  border-bottom-left-radius: 30px;
+  border-bottom-right-radius: 30px;
+  border-top-left-radius: 30px;
+  border-top-right-radius: 30px;
+  display: block;
+  margin:0 auto;
+
+}
+
+.login-steam-icon {
+  vertical-align: middle;
+  background-color: black;
+  padding: 4px;
+  font-size: 20px;
+  border-radius: 100%;
+  margin-right: 16px;
+  position: relative;
+  left:-15px;
+}
+
+.login-avatar
+{
+  border-radius: 50%;
+  border: 2px solid white;
+  position: relative;
+  left:-15px;
+}

@@ -68,6 +68,8 @@ var barScale = d3.scale.linear()
 var data = null;
 var average =  null;
 
+var settings = {};
+
 function formatIMR(value)
 {
     return Math.floor(value/10)*10;
@@ -75,28 +77,44 @@ function formatIMR(value)
 
 function initPage()
 {
-    handleAverageSkillsSwitch();
+    setupAverageSkillsSwitch();
     createCardBase();
     createRatingDivs();
     createTimeline();
+
+    loadSettings();
 }
 
-function handleAverageSkillsSwitch()
+function setupAverageSkillsSwitch()
 {
-    $('.skill-bar-average').hide();
+    updateAverageSwitch()
 
-    $(document).on('click','#average-switch label',function(){
+    d3.select('#average-switch')
+        .on('change',
+            function()
+            {
+                if(settings["show-averages"] === "true")
+                {
+                    changeSetting("show-averages", "false");
+                }
+                else
+                {
+                    changeSetting("show-averages", "true");
+                }
 
-        var val = $(this).parents('#average-switch').first().data('averages');
-        val = (val == 'off' ? 'on' : 'off');
-        console.log(val);
+                updateAverageSwitch();
 
-        $(this).parents('#average-switch').first().data('averages',val);
+                if(selected_match)
+                {
+                    displayMatch(selected_match_data);
+                }
+            }
+        );
+}
 
-        if(val == 'on') $('.skill-bar-average').show();
-        else $('.skill-bar-average').hide();
-
-    });
+function updateAverageSwitch()
+{
+    d3.select("#averages-checkbox").property("checked", settings["show-averages"] === "true"? true :false);
 }
 
 function createCardBase()
@@ -434,6 +452,19 @@ var reload_interval = 60*1000;
 
 function load(new_data)
 {
+    if(!new_data)
+    {
+        console.log("no data");
+
+        setTimeout(
+            function(){
+                //console.log("reload");
+                reloadMatches(load);
+            },
+            2*reload_interval);
+        return;
+    }
+
     data = new_data;
     average = calculateAverage(data);
 
@@ -755,8 +786,6 @@ function displayMatch(match)
     renderTips(match);
     renderHeroImages(match);
 
-    if($("#average-switch").data('averages') == 'off')
-        $('.skill-bar-average').hide();
 }
 
 function  clearMatch()
@@ -908,19 +937,19 @@ function createSkillRow(d)
         .attr("class", "col-xs-1")
             .append("div")
                 .attr("class", "skill-score")
-                .attr("style", "color:"+ d["rating-colour"]);
+                .style("color", d["rating-colour"]);
 
     var bar_container  = content_row.append("div")
                                     .attr("class", "col-md-5 col-xs-11")
                                         .append("div")
-                                        .attr("style", "width: 100%;")
+                                        .style("width", "100%")
                                         .attr("class", "skill-bar");
 
     bar_container.append("div")
         .attr("class", "skill-bar-average");
     bar_container.append("div")
         .attr("class", "skill-bar-value")
-        .attr("style", "background:"+ d["rating-colour"]);
+        .style("background", d["rating-colour"]);
 
     var details_row = row_container.append("div")
                                     .attr("class", "row")
@@ -944,10 +973,12 @@ function updateSkillRow(d)
         .text((d.skill in skill_constants? skill_constants[d.skill]["label"] : d.skill));
 
     row.select(".skill-bar-value")
-        .attr("style", "width:"+d.score+"%;background:"+ d["rating-colour"]);
+        .style("width", d.score+"%")
+        .style("background", d["rating-colour"]);
 
     row.select(".skill-bar-average")
-        .attr("style", "width:"+d.avg["index"]+"%");
+        .style("width", d.avg["index"]+"%")
+        .style("display", settings["show-averages"] === "true" ? null : "none");
 
     row.select(".skill-score")
         //.attr("style", "padding-left:"+(d.score+5)+"%;")
@@ -1078,6 +1109,8 @@ $(document).ready(function(){
         }
     );
     reloadMatches(load);
+
+    loadSettings();
 });
 
 $("#queue-matches-button" ).click(function() 
@@ -1121,4 +1154,83 @@ function checkHistoryJob(job_id)
             }
         }
     );
+}
+
+
+var  dashboard_tutorial = 
+[
+    {
+        "highlight-selector": ".playercard",
+        "tooltip-selector": "#tutorial-tooltip-playercard",
+        "position": "below"
+    },
+    {
+        "highlight-selector": "#matches-graph-container",
+        "tooltip-selector": "#tutorial-tooltip-matches",
+        "position": "below"
+    },
+    {
+        "highlight-selector": ".match-stats",
+        "tooltip-selector": "#tutorial-tooltip-skills",
+        "position": "above"
+    },
+];
+
+
+function loadSettings()
+{
+    d3.json("/api/get-settings",
+        function(data)
+        {
+            console.log("got settings", data)
+
+            if(data["result"] === "success")
+            {
+                settings = data["settings"];
+
+                validateSettings();
+
+                if(! (settings["tutorial-shown"] === "true"))
+                {
+                    setTimeout(
+                        function()
+                        {
+                            init_tutorial(dashboard_tutorial);
+                        }
+                        ,500);
+
+                    changeSetting("tutorial-shown", true);
+                }
+
+                updateAverageSwitch();
+
+                if(selected_match_data)
+                    displayMatch(selected_match_data);
+            }
+        });
+}
+
+function validateSettings()
+{
+    if(!settings)
+    {
+        settings = {};
+    }
+    if(! ("show-averages" in settings))
+        settings["show-averages"] = "false";
+    if(! ("tutorial-shown" in settings))
+        settings["tutorial-shown"] = "false";
+}
+
+function changeSetting(setting, value)
+{
+    settings[setting] = value;
+
+    d3.json("/api/change-setting?setting="+setting+"&value="+value,
+        function(data)
+        {
+            console.log("setting change response", setting, value, data)
+        }
+    );
+
 }

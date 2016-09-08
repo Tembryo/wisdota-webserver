@@ -1,0 +1,57 @@
+
+<link href="/static/css/tutorial.css" rel="stylesheet">
+
+<div id="tutorial-overlay" class="tutorial-overlay">
+
+    <!-- <tutorial-tooltips> -->
+
+    <div id="close-tutorial"><i class="fa fa-times"></i> Close tutorial</div>
+
+    <div id="tutorial-tooltip-playercard" class="tutorial-tooltip arrow-top" style="width:300px">
+
+        <div class="tutorial-tooltip-title">Playercard</div>
+        <div class="tutorial-tooltip-text">
+            A short summary of your performance in the selected game. The IMR ("individual match rating") is an estimated overall rating on the MMR-scale. 
+            <br><br>
+            The other subscores rate your performance in some specific parts of the game, on the same scale.
+        </div>
+
+        <div class="tutorial-next pull-right">Continue</div>
+        
+    </div>
+
+    <div id="tutorial-tooltip-matches" class="tutorial-tooltip arrow-top" style="width:500px">
+
+        <div class="tutorial-tooltip-title">Your Matches</div>
+        <div class="tutorial-tooltip-text">
+            We use the SteamAPI to show the latest games you played (most recent on the right), and for analysed matches your IMR rating in the game. 
+            <br><br>
+            Click on "Parse all recent matches" to add your games to the processing queue. Due to Valve dropping old matches we can only download and analyse matches played in the last ~7 days. Typically parsing takes ~4 minutes.
+            <br><br>
+            Click on match bubbles to see more details about your performance.
+        </div>
+
+        <div class="tutorial-next pull-right">Continue</div>
+        
+    </div>
+
+    <div id="tutorial-tooltip-skills" class="tutorial-tooltip arrow-bottom" style="width:600px">
+
+        <div class="tutorial-tooltip-title">Detailed Evaluation</div>
+        <div class="tutorial-tooltip-text">
+            During match analysis we collect a number of metrics about your gameplay, which we use to estimate your IMR and the subscores.
+            <br><br>
+            We also look at how each metric affected the IMR to see how good your value was (range 1-100). If one score is particularly low, it might be something you want to focus on to improve. We highlight the three most interesting metrics in the "Tips" tab.
+            <br><br>
+            You can also check out the match review, to remember what happened in that particular game, and see the ratings for the other players on the scoreboard. 
+        </div>
+
+        <div class="tutorial-next pull-right">Close</div>
+        
+    </div>
+
+    <!-- </tutorial-tooltips> -->
+
+</div>
+
+<script type="text/javascript" src="/static/js/tutorial.js"></script>

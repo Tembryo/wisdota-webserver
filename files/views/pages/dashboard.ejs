@@ -1,6 +1,7 @@
 <%  layout('base-template'); 
     navigation_entries=[
     ];
+    page = 'dashboard'; 
 -%>
     <link href="/static/css/dashboard.css" rel="stylesheet">
     <link href="/static/css/playercard.css" rel="stylesheet">
@@ -16,15 +17,11 @@
         }
     </style>
 
-
-<% page = 'dashboard'; %>
-<% include ../partials/header %>
-
 <section class="top-dashboard">
     <div id="user-dashboard">
         <div class="container">
             <div class="row">
-                <div class="col-md-4">
+                <div class="col-md-4  col-xs-12">
 
                     <div class="playercard">
                         <div class="playercardwrapper">
@@ -41,9 +38,9 @@
 
                                 <div class="under-top-wrapper">
                                     <a href="" style="color:#e4d6ca"><span id="current-imr"></span> IMR</a>
-                                    <a href="">
+                                    <!--<a href="">
                                         <i class="fa fa-list"></i>
-                                    </a>
+                                    </a>-->
                                 </div>
                             </div>
                             <div class="mid-card">
@@ -52,37 +49,33 @@
                         </div>
                     </div>
                 </div>
-                <div class="col-md-8" id="matches-graph-container">
-                    <div class="row">
-                        <div class="all-matches-table col-md-12">
-                            <div class="table-wrapper">
-
-                                <div class="row">
-                                    <div class="top-table">
-                                        <div class="pull-left">
-                                            <h4>Your most recent matches</h4>
-                                        </div>
-                                        <div class="pull-right">
-                                            <div class="download-all">
-                                                <a href="#" id="queue-matches-button"><i class="fa fa-download" aria-hidden="true"></i> Parse all recent matches</a>
-                                            </div>
+                <div class="col-md-8 col-xs-12" id="matches-graph-container">
+                    <div class="all-matches-table">
+                        <div class="table-wrapper">
+                            <div class="row">
+                                <div class="top-table">
+                                    <div class="pull-left">
+                                        <h4>Your most recent matches</h4>
+                                    </div>
+                                    <div class="pull-right">
+                                        <div class="download-all">
+                                            <a href="#" id="queue-matches-button"><i class="fa fa-download" aria-hidden="true"></i> Parse all recent matches</a>
                                         </div>
                                     </div>
                                 </div>
+                            </div>
+                            <div class="row">
+                                <br>
+                                <div class="actual-table">
+                                    <div id="timeline-container"></div>
+                                    <!--<canvas id="matches-graph-canvas"></canvas>-->
 
-                                <div class="row">
-                                    <br>
-                                    <div class="actual-table">
-                                        <div id="timeline-container"></div>
-                                        <!--<canvas id="matches-graph-canvas"></canvas>-->
-
-                                       <div id="change-nr-matches-container">
-                                            <div class="nr-matches nr-matches-selected" id="show-matches-5">5</div>
-                                            <div class="nr-matches" id="show-matches-10">10</div>
-                                            <div class="nr-matches" id="show-matches-20">20</div>
-                                            <div class="nr-matches" id="show-matches-50">50</div>
-                                       </div>
-                                    </div>
+                                   <div id="change-nr-matches-container">
+                                        <div class="nr-matches nr-matches-selected" id="show-matches-5">5</div>
+                                        <div class="nr-matches" id="show-matches-10">10</div>
+                                        <div class="nr-matches" id="show-matches-20">20</div>
+                                        <div class="nr-matches" id="show-matches-50">50</div>
+                                   </div>
                                 </div>
                             </div>
                         </div>
@@ -110,10 +103,10 @@
                         <div class="pull-right">
                             <div class="match-buttons">
                                 <span id="average-switch-label">Show average ratings?</span>
-                                <div id="average-switch" data-averages="off">
+                                <div id="average-switch">
                                     <div class="switch">
-                                      <input id="cmn-toggle-1" class="cmn-toggle cmn-toggle-round" type="checkbox">
-                                      <label for="cmn-toggle-1"></label>
+                                      <input id="averages-checkbox" class="cmn-toggle cmn-toggle-round" type="checkbox">
+                                      <label for="averages-checkbox"></label>
                                     </div>
                                 </div>
                                 <a id= "review-link"  href="#" class="match-review"> <i class="fa fa-play" aria-hidden="true"></i>
@@ -225,3 +218,5 @@
 <script type="text/javascript" src="/static/js/constants.js"></script>
 <script type="text/javascript" src="/static/js/dashboard-ui-constants.js"></script>
 <script type="text/javascript" src="/static/js/dashboard.js"></script>
+
+<%- include ../partials/tutorial-dashboard.ejs -%>
