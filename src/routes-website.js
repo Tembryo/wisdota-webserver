@@ -84,8 +84,15 @@ router.get('/plus', function(req, res)
 router.get('/about', function(req, res)
 {
     var data = collectTemplatingData(req);
+    res.render("pages/about.ejs", data);
+});
+
+router.get('/faq', function(req, res)
+{
+    var data = collectTemplatingData(req);
     res.render("pages/faq.ejs", data);
 });
+
 
 router.get('/user',
     authentication.ensureAuthenticated,

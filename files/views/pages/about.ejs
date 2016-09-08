@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>About Us</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+    <link rel="stylesheet" href="/static/css/font-awesome-4.6.3/css/font-awesome.min.css">
+    <link rel="stylesheet" type="text/css" href="/static/css/reset.css">
+    <link rel="stylesheet" href="/static/css/style-about.css">
+    <link href="https://fonts.googleapis.com/css?family=Roboto:100,300,400,500,700,900" rel="stylesheet"> 
+  </head>
+  <body>
+      <section class="about-us">
+          <header>
+          	<div class="container">
+	          	<div class="row">
+		           <div class="sign-in col-xs-6 col-sm-3 col-sm-offset-1 col-md-2 col-md-offset-2">
+		              <div class="container-signin">
+		              	<% if (user) { %>
+		              	    <a href="#" title="Sign in">
+				                <img src="/static/img/steam.png" alt="Sign Out">
+				                <span>SIGN OUT</span>
+			              	</a>
+		              	<% } else { %>
+      	                  	<a href="/user" title="Sign in">
+      	    	                <img src="/static/img/steam.png" alt="Sign Out">
+      	    	                <span>SIGN IN</span>
+      	                  	</a>
+		              	<% } %>
+		              </div>
+		            </div> 
+		            <ul class="contact-header col-xs-6 col-sm-4">
+		              <li>
+		                <a href="/about" title="About us">
+		                  About us
+		                </a>
+		              </li>
+		              <li>
+		                <a href="/contact" title="Contact">
+		                  Contact
+		                </a>
+		              </li>
+		            </ul>
+		            <h1 class="header-title text-center col-xs-12 col-sm-4">
+		                About us
+		            </h1>
+		        </div>
+		    </div>
+          </header>
+          <div class="aboutus-content container">
+	          <div class="row">
+	          	<div class="col-xs-12 col-md-8">
+	          		<img src="/static/img/boys.png" alt="">
+	          	</div>
+	            <div class="col-xs-12 col-md-4 content">
+	              <h2>
+	                We love Dota and so we're building an Al coach for it!
+	              </h2>
+	              <p>
+	                The team combines hardcore gaming nerdiness with a passion for computer science, artificial intelligence and optimisation. 
+	              </p>
+	              <p>
+	              	We've played thousands of hours of Dota and felt the frustration of not knowning where to focus in order to better. Our mission is to build a system that can analyse our games and help us improve as players. 
+	              </p>
+	              <p>
+	              	We received pre-seed funding from Entrepreneur First and the Y Combinator Fellowship program, and if you are interested in joining us feel free to contact us at <strong>founders@wisdota.com</strong> .
+	              </p>
+	            </div>
+	          </div>
+	      </div>
+      	  <h2 class="title text-center">
+      		We're building an Al coach for gamers.
+      	  </h2>
+      	  <div class="container">
+      	  	<div class="row">
+      	  		<div class="col-xs-12 container-coach white">
+			      	<p>
+			      		Is it possible to build an AI that can understand how you play and provide feedback on how you can improve? It is a big problem, but we think it will be fun to try to solve it. 
+			      	</p>
+			    </div>
+			    <div class="col-xs-12 container-coach gray">
+			      	<p>
+			      		We have two main objectives: to explore recent advances in reinforcement learning and neural networks, and to use them to build products that will help gamers get better at their games. 
+			      	</p>
+			    </div>
+      	  	</div>
+      	  </div>
+	      <h2 class="title text-center">
+			Our Team
+	      </h2>
+	      <div class="team container">
+	      	<div class="row">
+	      		<div class="col-xs-12 col-sm-12 col-md-6">
+	      			<div class="container-team">
+	      				<div class="image">
+							<img src="/static/img/men.png" alt="">
+		      			</div>	
+		      			<h2>
+		      				Richard M.
+		      			</h2>
+		      			<div class="details">
+		      				<span>
+								Skill1
+		      				</span>
+		      				<span>
+		      					Oxford University
+		      				</span>
+		      			</div>
+		      			<div class="description">
+		      				<p>
+		      					Richard has a PhD in optimisation and control theory from Oxford University.
+		      				</p>
+		      				<p>
+		      					He was awarded the O.Hugo Schuck prize in 2015.
+		      				</p>
+		      				<p>
+		      					His interest in artificial intelligence was first sparked by reading Edmund Roll's book on Neural Networks and Brain Function, which later led to short projects working in an fMRI lab.
+		      				</p>
+		      			</div>
+	      			</div>
+	      		</div>
+	      		<div class="col-xs-12 col-sm-12 col-md-6">
+	      			<div class="container-team">
+	      				<div class="image">
+							<img src="/static/img/men2.png" alt="">
+		      			</div>	
+		      			<h2>
+		      				Quirin F.
+		      			</h2>
+		      			<div class="details">
+		      				<span>
+								Technical University Munich
+		      				</span>
+		      				<span>
+		      					3500+ h
+		      				</span>
+		      			</div>
+						<div class="description">
+							<p>
+								Richard has a PhD in optimisation and control theory from Oxford University.
+							</p>
+							<p>
+								He was awarded the O.Hugo Schuck prize in 2015.
+							</p>
+							<p>
+								His interest in artificial intelligence was first sparked by reading Edmund Roll's book on Neural Networks and Brain Function, which later led to short projects working in an fMRI <lab class=""></lab>
+							</p>
+						</div>
+	      			</div>
+	      		</div>
+	      	</div>
+	      </div>
+          <footer>
+          	<div class="container">
+          		<div class="row">
+		            <div class="footer-div col-xs-12 col-sm-12 col-md-7">
+		            	<div class="row">
+		            		<div class="col-xs-12 col-sm-12 col-md-6 content-footer-div">
+				              <a href="#" title="ef.">
+				                <img src="/static/img/ef.png" alt="EF">
+				              </a>
+				              <a href="#" title="YCF">
+				                <img src="/static/img/ycf.png" alt="YCF" class="ycf"> 
+				              </a>
+				            </div>
+				            <div class="col-xs-12 col-sm-12 col-md-6 content-footer-div">
+				            	<ul class="footer-nav">
+					                <li>
+					                  <a href="#" title="Home">
+					                    Home
+					                  </a>
+					                </li>
+					                <li class="text-right">
+					                  <a href="#" title="Blog">
+					                    Blog
+					                  </a>
+					                </li>
+					                <li class="text-left">
+					                  <a href="#" title="Learn more">
+					                    Learn more
+					                  </a>
+					                </li>
+					            </ul>
+				            </div>
+				        </div>
+		            </div>
+		            <div class="footer-div col-xs-12 col-sm-12 col-md-5">
+		              <form action="">
+		                <img src="/static/img/footer-heading.png" alt="Wisdota">
+		                <input type="text" maxlength="60" placeholder="Your Email">
+		                <button type="submit">
+		                  GET UPDATES    
+		                </button>
+		              </form>
+		            </div>
+		         </div>
+		      </div>
+          </footer>
+      </section>
+  </body>
+</html>
