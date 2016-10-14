@@ -12,6 +12,7 @@ d3.json(//"data/monkey_vs_nip.json"
     json_address
         ,function(error, data){
             replay_data = data;
+            fixReplayData();
             buildDataIndices();
             callback_finished();
         });
@@ -92,6 +93,23 @@ function buildDataIndices()
     var a=0;
 }
 
+function fixReplayData()
+{
+    //fix some shit from the python, hopefully obsolete in next analysis version
+
+    for (var event_id in replay_data["events"])
+    {
+        switch(replay_data["events"][event_id]["type"])
+        {
+        case "kill":
+            break;
+        case "fight":
+            replay_data["events"][event_id]["position"] = replay_data["events"][event_id]["mean_position"];
+            break;
+        }
+    }
+}
+
 function generateDiagramEvents(events)
 {
     var event_data = [];
@@ -126,10 +144,10 @@ function partitionIntoIntersectingGroups(events)
             event_start = event["time"];
             event_end = event["time"];
         }
-        else if(event.hasOwnProperty("time-start"))
+        else if(event.hasOwnProperty("time_start"))
         {
-            event_start = event["time-start"];
-            event_end = event["time-end"];
+            event_start = event["time_start"];
+            event_end = event["time_end"];
         }
         else{
             console.log("bad event");
@@ -162,7 +180,7 @@ function processEventGroup(intersecting_group)
         var event = intersecting_group[intersecting_i];
         var identifier = event["type"];//+"--"+event["location"];
         if(event["type"]=="fight")
-            identifier += event["time-start"];
+            identifier += event["time_start"];
 
         if(grouped.hasOwnProperty(identifier))
         {
@@ -190,10 +208,10 @@ function processEventGroup(intersecting_group)
                 time_start = Math.min(time_start, event["time"]);
                 time_end = Math.max(time_end, event["time"]);
             }
-            else if(event.hasOwnProperty("time-start"))
+            else if(event.hasOwnProperty("time_start"))
             {
-                time_start = Math.min(time_start, event["time-start"]);
-                time_end = Math.max(time_end, event["time-end"]);
+                time_start = Math.min(time_start, event["time_start"]);
+                time_end = Math.max(time_end, event["time_end"]);
             }
             else
             {
@@ -211,8 +229,8 @@ function processEventGroup(intersecting_group)
         var diagram_event = 
         {
             "id": generated_id,
-            "time-start": time_start,
-            "time-end": time_end,
+            "time_start": time_start,
+            "time_end": time_end,
             "involved":Object.keys(involved),
             "location": grouped[identifier][0]["location"],
             "type": grouped[identifier][0]["type"],
@@ -247,13 +265,13 @@ function compareEventsByTime(a, b)
     var time_b = 0;
     if(a.hasOwnProperty("time"))
         time_a = a["time"];
-    else if(a.hasOwnProperty("time-start"))
-        time_a = a["time-start"];
+    else if(a.hasOwnProperty("time_start"))
+        time_a = a["time_start"];
 
     if(b.hasOwnProperty("time"))
         time_b = b["time"];
-    else if(b.hasOwnProperty("time-start"))
-        time_b = b["time-start"];
+    else if(b.hasOwnProperty("time_start"))
+        time_b = b["time_start"];
 
     if(time_a < time_b)
         return -1;
@@ -343,26 +361,81 @@ function generateGraph(id, group, timeseries, xrange, yrange, area_colors){
                 .domain(xrange)
                 .range(xrange);
 
-        var range = Math.max(   Math.abs(d3.min(timeseries["samples"], function(sample){return sample["v"][0];})),
-                    Math.abs(d3.max(timeseries["samples"], function(sample){return sample["v"][0];}))
+        var range = Math.max(   Math.abs(d3.min(timeseries["samples"], function(sample){return sample["v"];})),
+                    Math.abs(d3.max(timeseries["samples"], function(sample){return sample["v"];}))
                     );
         yscale = d3.scale.linear()
                 .domain([-range,range])
                 .range(yrange);
 
         var postive_area = d3.svg.area()
-            .x(function(d) {return xscale(d["t"]);})
+            .x(function(d) {
+                var val = 0;
+                if("t" in d)
+                    val = d["t"];
+                else
+                    console.log("bad datapoint", d);
+                return xscale(val);
+            })
             .y0(0)
-            .y1(function(d) {return - Math.max(0, yscale(d["v"][0]));});
+            .y1(function(d) 
+                {
+                    var val = 0;
+
+                    if(d["v"] instanceof Array) 
+                        val = d["v"][0];
+                    else if("v" in d)
+                        val = d["v"];
+                    else
+                        console.log("bad datapoint", d);
+
+                    return - Math.max(0, yscale(val));
+                });
 
         var negative_area = d3.svg.area()
-            .x(function(d) {return xscale(d["t"]);})
-            .y0(function(d) {return - Math.min(0, yscale(d["v"][0]));})
+            .x(function(d) {
+                var val = 0;
+                if("t" in d)
+                    val = d["t"];
+                else
+                    console.log("bad datapoint", d);
+                return xscale(val);
+            })
+            .y0(function(d) 
+                {
+                    var val = 0;
+
+                    if(d["v"] instanceof Array) 
+                        val = d["v"][0];
+                    else if("v" in d)
+                        val = d["v"];
+                    else
+                        console.log("bad datapoint", d);
+                    return - Math.min(0, yscale(val));
+                })
             .y1(0);
 
         var line = d3.svg.line()
-                    .x(function(d) {return xscale(d["t"]);})
-                    .y(function(d) {return - yscale(d["v"][0]);})
+                    .x(function(d) {
+                        var val = 0;
+                        if("t" in d)
+                            val = d["t"];
+                        else
+                            console.log("bad datapoint", d);
+                        return xscale(val);
+                        })
+                    .y(function(d) 
+                        {
+                            var val = 0;
+
+                            if(d["v"] instanceof Array) 
+                                val = d["v"][0];
+                            else if("v" in d)
+                                val = d["v"];
+                            else
+                                console.log("bad datapoint", d);
+                            return - yscale(val);
+                        })
                     .interpolate('linear');
 
         graph_node.append('svg:path')
@@ -499,6 +572,7 @@ location_to_locationline =
     "toplane-between-radiant-t2-t3": 0,
     "toplane-between-dire-t1-t2": 0,
     "toplane-between-dire-t2-t3": 0,
+    "top": 0,
 
     "dire-jungle": 1,
     "radiant-secret": 1,
@@ -511,6 +585,8 @@ location_to_locationline =
     "midlane-radiant-between-t2-t3": 3,
     "midlane-dire-between-t1-t2": 3,
     "midlane-dire-between-t2-t3": 3,
+
+    "mid": 3,
 
     "radiant-jungle": 5,
     "dire-secret": 5,
@@ -526,8 +602,7 @@ location_to_locationline =
     "botlane-dire-between-t1-t2": 6,
     "botlane-dire-between-t2-t3": 6,
 
-
-
+    "bot": 6
 };
 
 
@@ -546,8 +621,8 @@ timeline_kill_radius = 10;
 
 timeline_cursor_snap_interval = 15;
 
-color_scale_fights = d3.scale.ordinal()
-            .domain(["encounter", "skirmish", "battle", "clash"])
+color_scale_fights = d3.scale.linear()
+            .domain([1, 3, 8, 10])
             .range([colors_blues[1], colors_blues[2], colors_blues[3], colors_blues[4]]);
 
 function getLocationCoordinates(location)
@@ -1036,11 +1111,11 @@ function createSubTimeline(sub_timeline, index){
             .enter()
             .append("svg:rect")
             .attr({ "class": function(fight){ return "timeline-kill "+replay_data["events"][fight]["team"]},
-                "x": function(fight){return replay_data["events"][fight]["time-start"];},
+                "x": function(fight){return replay_data["events"][fight]["time_start"];},
                 "y": -sub_timeline_height/2,
-                "width": function(fight){return replay_data["events"][fight]["time-end"] - replay_data["events"][fight]["time-start"];},
+                "width": function(fight){return replay_data["events"][fight]["time_end"] - replay_data["events"][fight]["time_start"];},
                 "height": sub_timeline_height,
-                "fill": function(fight){return color_scale_fights(replay_data["events"][fight]["intensity"]);}
+                "fill": function(fight){return color_scale_fights(replay_data["events"][fight]["heroes_involved"].length);}
                 });
 
         break;
@@ -1209,10 +1284,10 @@ function filterEventsMap(event){
             (event["time"]+event_duration/2 > gui_state["cursor-time"])) )
             return false;
     }
-    else if(event.hasOwnProperty("time-start") && event.hasOwnProperty("time-end"))
+    else if(event.hasOwnProperty("time_start") && event.hasOwnProperty("time_end"))
     {
-        if( ! (event["time-end"] > gui_state["cursor-time"] &&  
-            event["time-start"] <= gui_state["cursor-time"]) )
+        if( ! (event["time_end"] > gui_state["cursor-time"] &&  
+            event["time_start"] <= gui_state["cursor-time"]) )
             return false;
 
     }
@@ -1228,10 +1303,10 @@ function filterEventsMap(event){
             event["time"] <= (gui_state["cursor-time"] + gui_state["timeline-cursor-width"]/2) ) )
             return false;
     }
-    else if(event.hasOwnProperty("time-start") && event.hasOwnProperty("time-end"))
+    else if(event.hasOwnProperty("time_start") && event.hasOwnProperty("time_end"))
     {
-        if( ! (event["time-end"] >= (gui_state["cursor-time"] - gui_state["timeline-cursor-width"]/2) &&  
-            event["time-start"] <= (gui_state["cursor-time"] + gui_state["timeline-cursor-width"]/2) ) )
+        if( ! (event["time_end"] >= (gui_state["cursor-time"] - gui_state["timeline-cursor-width"]/2) &&  
+            event["time_start"] <= (gui_state["cursor-time"] + gui_state["timeline-cursor-width"]/2) ) )
             return false;
 
     }
@@ -1295,7 +1370,7 @@ function createMapEvent(event){
     {
     case "fight":
         location.attr({
-            "fill": color_scale_fights(event["intensity"]),
+            "fill": color_scale_fights(event["heroes_involved"].length),
             });
         break;
     case "movement":
@@ -1330,13 +1405,13 @@ function createMapEvent(event){
             .attr({
                 "class": "event-background",
                 "d": createRotationPath(event),
-                "fill": team_color[replay_data["entities"][event["involved"][0]]["team"]],
+                "fill": team_color[replay_data["entities"][event["involved"][0]]["side"]],
                 "stroke": "black",
                 "stroke-width": (event["rotation-type"] == "teleport")? 1 : 0,
                 "opacity": computeEventOpacity(event)
                 });
         break;
-    case "creep-death":
+    case "creep_death":
         color = "";
         switch(event["team"])
         {
@@ -1354,6 +1429,9 @@ function createMapEvent(event){
             "r": icon_size*0.5,
             "fill": color
             });
+        break;
+    default:
+        console.log("unknown map event type", event);
     }
 
     updateMapEvent.call(this,event);
@@ -1369,10 +1447,10 @@ function computeEventOpacity(event)
         time_distance = Math.abs(gui_state["cursor-time"] - event["time"]);
 
     }
-    else if(event.hasOwnProperty("time-start") && event.hasOwnProperty("time-end"))
+    else if(event.hasOwnProperty("time_start") && event.hasOwnProperty("time_end"))
     {
-        time_distance = Math.abs(Math.min(0, gui_state["cursor-time"] - event["time-start"])) +
-                    Math.abs(Math.max(0, gui_state["cursor-time"] - event["time-end"]))
+        time_distance = Math.abs(Math.min(0, gui_state["cursor-time"] - event["time_start"])) +
+                    Math.abs(Math.max(0, gui_state["cursor-time"] - event["time_end"]))
                 ;
     }
     time_distance = Math.max(0, time_distance - event_duration);
@@ -1384,15 +1462,13 @@ function createMapUnit(entry)
 {
     var group = d3.select(this);
 
-
-
     var entity = replay_data["entities"][entry.key];
     group.append("svg:circle")
         .attr({
             "cx": 0,
             "cy": 0,
             "r": icon_size*0.75,
-            "fill": team_color[entity["team"]]
+            "fill": team_color[entity["side"]]
             })
         .on("click", mapOnUnitClick);
 
@@ -1413,8 +1489,9 @@ function createMapUnit(entry)
                 "x": 0,
                 "y": -0.5*icon_size,
                 "class": "icon-label"
-                })
-            .text(replay_data["header"]["players"][entity["control"]]["name"]);
+                });
+            //TODO: 
+            //.text(replay_data["header"]["players"][entity["control"]]["name"]);
     }
 
     updateMapUnit.call(this,entry);
@@ -1495,7 +1572,7 @@ function updateMapEvent(event){
     else
         coords = new Victor(5,5);
     if(event.hasOwnProperty("position"))
-        coords = gamePositionToCoordinates([event["position"]["x"], event["position"]["y"]]);
+        coords = gamePositionToCoordinates(event["position"]);
 
     group.attr({
             "transform": "translate("+coords.x+","+coords.y+")"
@@ -1901,10 +1978,10 @@ function filterEventsDiagram(event)
         return  event["time"] >= getDiagramTimeScale().domain()[0] &&
             event["time"] <= getDiagramTimeScale().domain()[1];
     }
-    else if(event.hasOwnProperty("time-start") && event.hasOwnProperty("time-end"))
+    else if(event.hasOwnProperty("time_start") && event.hasOwnProperty("time_end"))
     {
-        return  event["time-end"] >= getDiagramTimeScale().domain()[0] &&  
-            event["time-start"] <= getDiagramTimeScale().domain()[1];
+        return  event["time_end"] >= getDiagramTimeScale().domain()[0] &&  
+            event["time_start"] <= getDiagramTimeScale().domain()[1];
     }
     else
     {
@@ -1924,7 +2001,7 @@ function createDiagramEvent(entry)
     var event = entry.value;
     var group = d3.select(this);
     
-    if(event.hasOwnProperty("time-start") && event.hasOwnProperty("time-end"))
+    if(event.hasOwnProperty("time_start") && event.hasOwnProperty("time_end"))
     {
 
         group.append("svg:rect")
@@ -1939,7 +2016,7 @@ function createDiagramEvent(entry)
     case "fight":
         group.selectAll(".diagram-event-background")
             .attr({
-            "fill": color_scale_fights(event["intensity"]),
+            "fill": color_scale_fights(event["heroes_involved"].length),
             });
         break;
     case "movement":
@@ -1989,15 +2066,15 @@ function updateDiagramEvent(entry)
     }
 
     var timescale = getDiagramTimeScale();
-    var start = Math.max(timescale.domain()[0], event["time-start"]);
-    var end = Math.min(timescale.domain()[1], event["time-end"]);
+    var start = Math.max(timescale.domain()[0], event["time_start"]);
+    var end = Math.min(timescale.domain()[1], event["time_end"]);
     var location_line_height = (diagram_height - diagram_inset_top)/gui_state["location-lines-count"];
 
     var height = location_line_height*(1-diagram_event_height_margins)/event["group-size"];
     var vertical_offset = height*event["group-i"] + (event["group-i"]+1)*location_line_height*(diagram_event_height_margins/(event["group-size"]+1));
     var background = group.selectAll(".diagram-event-background")
             .attr({ "class": "diagram-event-background",
-                "x": timescale(start) - timescale((event["time-start"]+event["time-end"])/2),
+                "x": timescale(start) - timescale((event["time_start"]+event["time_end"])/2),
                 "y": -location_line_height/2 + vertical_offset,
                 "width": timescale(end)-timescale(start),
                 "height": height,
@@ -2048,9 +2125,9 @@ function getEventTime(event)
     {
         return event["time"];
     }
-    else if(event.hasOwnProperty("time-start") && event.hasOwnProperty("time-end"))
+    else if(event.hasOwnProperty("time_start") && event.hasOwnProperty("time_end"))
     {
-        return (event["time-start"]+event["time-end"])/2;
+        return (event["time_start"]+event["time_end"])/2;
     }
     else
     {
@@ -2122,22 +2199,22 @@ function updateDiagramHistory(id)
                     "t": event["time"],
                     "v": event["location"]});
         }
-        else if(event.hasOwnProperty("time-start") && event.hasOwnProperty("time-end"))
+        else if(event.hasOwnProperty("time_start") && event.hasOwnProperty("time_end"))
         {
             var sample_left = {
-                    "t": event["time-start"],
+                    "t": event["time_start"],
                     "v": event["location"]};
             var sample_right = {
-                    "t": event["time-end"],
+                    "t": event["time_end"],
                     "v": event["location"]};
 
-            if(event["time-start"] <= diagram_timescale.domain()[0] &&
-                event["time-end"] > diagram_timescale.domain()[0])
+            if(event["time_start"] <= diagram_timescale.domain()[0] &&
+                event["time_end"] > diagram_timescale.domain()[0])
             {
                 sample_left["t"] = diagram_timescale.domain()[0];
             }
-            if(event["time-start"] <= diagram_timescale.domain()[1] &&
-                event["time-end"] > diagram_timescale.domain()[1])
+            if(event["time_start"] <= diagram_timescale.domain()[1] &&
+                event["time_end"] > diagram_timescale.domain()[1])
             {
                 sample_right["t"] = diagram_timescale.domain()[1];
                 console.log("adjusted right");
@@ -2437,10 +2514,10 @@ function filterEvents(event)
             (event["time"]+event_duration/2 > gui_state["cursor-time"])) )
             return false;
     }
-    else if(event.hasOwnProperty("time-start") && event.hasOwnProperty("time-end"))
+    else if(event.hasOwnProperty("time_start") && event.hasOwnProperty("time_end"))
     {
-        if( ! (event["time-end"] > gui_state["cursor-time"] &&  
-            event["time-start"] <= gui_state["cursor-time"]) )
+        if( ! (event["time_end"] > gui_state["cursor-time"] &&  
+            event["time_start"] <= gui_state["cursor-time"]) )
             return false;
 
     }
@@ -2462,9 +2539,9 @@ function createEvent(entry)
     {
         time.text(formatTime(event["time"]));
     }
-    else if(event.hasOwnProperty("time-start") && event.hasOwnProperty("time-end"))
+    else if(event.hasOwnProperty("time_start") && event.hasOwnProperty("time_end"))
     {
-        time.text(formatTime(event["time-start"])+" until "+formatTime(event["time-end"]));
+        time.text(formatTime(event["time_start"])+" until "+formatTime(event["time_end"]));
     }
 
     var text = row.append("td")

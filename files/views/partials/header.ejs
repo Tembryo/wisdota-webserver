@@ -1,42 +1,6 @@
 <link href="/static/css/header.css" rel="stylesheet">
 
-<header class="intro-header">
-
-    <% if(page == 'index') { %>
-
-        <div class="canvas-container">
-
-            <div id="canvas-overlay"></div>
-            <canvas id="dota-logo" style="position: relative;"></canvas>
-
-        </div>
-
-        <div id="top-slider">
-            
-            <i class="fa fa-angle-left" id="move-left" aria-hidden="true"></i>
-            <i class="fa fa-angle-right" id="move-right" aria-hidden="true"></i>
-
-            <div id="top-slider-cards">
-                <div class="slider-card" style="background-image:url(/static/img/landing-page/playercard1.png);background-size:cover;background-position:center;"></div>
-
-                <div class="slider-card" style="background-image:url(/static/img/landing-page/playercard2.png);background-size:cover;background-position:center;"></div>
-
-                <div class="slider-card" style="background-image:url(/static/img/landing-page/playercard3.png);background-size:cover;background-position:center;"></div>
-                
-                <div class="slider-card" style="background-image:url(/static/img/landing-page/playercard4.png);background-size:cover;background-position:center;"></div>
-
-                <div class="slider-card" style="background-image:url(/static/img/landing-page/playercard5.png);background-size:cover;background-position:center;"></div>
-                
-                <div class="slider-card" style="background-image:url(/static/img/landing-page/playercard6.png);background-size:cover;background-position:center;"></div>
-                
-                <div class="slider-card slider-card-active" style="background-image:url(/static/img/landing-page/playercard0.png);background-size:cover;background-position:center;"><i class="fa fa-times" id="close-top-slider"></i></div>
-                
-                <div class="slider-card" style="background-image:url(/static/img/landing-page/playercard7.png);background-size:cover;background-position:center;"></div>
-            </div>
-
-        </div>
-
-    <% } %>
+<header class="header">
 
     <nav class="navbar navbar-default">
         <div class="container-fluid">
@@ -55,26 +19,18 @@
             <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                 <div class="row">
 
-                    <div class="<% if(page == 'index') { %>col-sm-3<% } else { %>col-sm-6<% } %>">
+                    <div class="col-sm-5 col-xs-12">
                         <ul class="nav navbar-nav">
-                            <% if(page == 'dashboard') { %> <li><a href="/">Home</a></li> <% } %>
+                            <% if(! (typeof page !== 'undefined' && page === 'index')) { %> <li><a href="/">Home</a></li> <% } %>
+                            <li><a href="/faq">FAQ</a></li>
                             <li><a href="/about">About Us</a></li>
                             <li><a href="http://www.patreon.com/wisdota">Support Us</a></li>
                         </ul> <!-- nav navbar-nav -->
                     </div>
 
-                    <% if(page == 'dashboard') { %>
-                        <div class="col-sm-3"></div>
-                    <% } %>
+                    <div class="col-sm-3 col-xs-12"></div>
 
-                    <% if(page == 'index') { %>
-                        <div class="col-sm-6 hidden-xs">
-                            <h1 class="title1 text-center">Let Artificial Intelligence</h1>
-                            <h1 class="title2 text-center">analyse your Dota game</h1>
-                        </div>
-                    <% } %>
-
-                    <div class="col-sm-3">
+                    <div class="col-sm-4 col-xs-12">
                         <ul class="nav navbar-nav navbar-right">
                             <li>
                                 <div class="login-box">
@@ -109,23 +65,4 @@
         </div> <!-- container-fluid -->
     </nav> <!-- navbar navbar-default -->
 
-    <% if(page == 'index') { %>
-
-        <div class="container-fluid mobile-title">
-            <div class="hidden-sm hidden-md hidden-lg col-xs-12">
-                <h1 class="title1 text-center">Let Artificial Intelligence</h1>
-                <h1 class="title2 text-center">analyse your Dota game</h1>
-            </div>
-        </div>
-
-
-        <div class="bottom">
-            <div class="container-fluid">
-                <a href="#" id="view-example">View Example</a>
-                <br>
-                <a href="/user" class="btn btn-primary"><i class="fa fa-steam"></i>Analyse Myself</a>
-            </div> <!-- container-fluid -->
-        </div> <!-- bottom -->
-
-    <% } %>
 </header>

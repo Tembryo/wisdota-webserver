@@ -1,12 +1,52 @@
+html
+{
+    min-height:100%;
+    position:relative;
+}
+
 body {
-  font-family: 'Roboto', sans-serif;
+    background:
+        radial-gradient(
+            ellipse farthest-corner at top center,
+            rgba(143, 130, 139, 255) 0%,
+            rgba(143, 130, 139, 0) 75%),
+        radial-gradient(
+            ellipse farthest-corner at bottom right,
+            rgba(143, 130, 139, 255) 0%,
+            rgba(143, 130, 139, 0) 75%),
+        radial-gradient(
+            ellipse closest-side at center center,
+            rgba(143, 130, 139, 255) 0%,
+            rgba(143, 130, 139, 0) 75%),
+        linear-gradient(
+              rgba(87, 78, 83, 255), 
+              rgba(87, 78, 83, 255)
+            );
+    height: 100%;
+    margin: 0;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+
+    color: #f0f0f0;
+    font-family: 'Roboto', sans-serif;
+    font-weight: 300;
+    font-size: 18px;
+}
+
+h2 {
+  font-size: 28px;
+  padding: 20px 50px;
 }
 
 
+a {
+    color: #f0f0f0;
+    font-variant: small-caps;
+    letter-spacing: 1px;
+    text-decoration: none;
+}
 
-
-
-
-
-
-
+a:hover {
+    text-decoration: none;
+    color: #e39426;
+}

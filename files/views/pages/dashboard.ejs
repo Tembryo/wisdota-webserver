@@ -26,25 +26,28 @@
                     <div class="playercard">
                         <div class="playercardwrapper">
                             <div class="top-card">
-                                <div class="player-img" style="background: url(<%= avatar %>); background-size: 100%;">
+                                <div class="player-img-slot <%= (subscriber_level >= 0? "subscriber-slot-lvl"+subscriber_level : "") %>">
+                                    <img class="player-img <%= (subscriber_level < 0? "player-img-bordered" : "")%>" src="<%= avatar %>" >
+
                                 </div>
                                 <div class="player-title">
                                     <h4>
-                                        <%= user["name"] %>
+                                        <%= user["name"].substring(0,13) %>
                                     </h4>
                                 </div>
+
                             </div>
                             <div class="under-top-card">
 
                                 <div class="under-top-wrapper">
-                                    <a href="" style="color:#e4d6ca"><span id="current-imr"></span> IMR</a>
+                                    <a href="" style="color:#e4d6ca"><span id="current-imr"></span>IMR</a>
                                     <!--<a href="">
                                         <i class="fa fa-list"></i>
                                     </a>-->
                                 </div>
                             </div>
                             <div class="mid-card">
-                                <svg id="polygon-canvas"></svg>
+                               <svg id="polygon-canvas"></svg>
                             </div>
                         </div>
                     </div>
@@ -168,19 +171,20 @@
                                     <div class="hero">
                                         <img id="hero_4" src="http://placehold.it/170x90" class="img-responsive" alt="">
                                     </div>
-                                    <div class="hero">
+
+                                    <div class="hero dire-hero">
                                         <img id="hero_5" src="http://placehold.it/170x90" class="img-responsive" alt="">
                                     </div>
-                                    <div class="hero">
+                                    <div class="hero dire-hero">
                                         <img id="hero_6" src="http://placehold.it/170x90" class="img-responsive" alt="">
                                     </div>
-                                    <div class="hero">
+                                    <div class="hero dire-hero">
                                         <img id="hero_7" src="http://placehold.it/170x90" class="img-responsive" alt="">
                                     </div>
-                                    <div class="hero">
+                                    <div class="hero dire-hero">
                                         <img id="hero_8" src="http://placehold.it/170x90" class="img-responsive" alt="">
                                     </div>
-                                    <div class="hero">
+                                    <div class="hero dire-hero">
                                         <img id="hero_9" src="http://placehold.it/170x90" class="img-responsive" alt="">
                                     </div>
 

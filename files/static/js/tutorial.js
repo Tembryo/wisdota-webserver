@@ -1,6 +1,6 @@
 var current_tutorial_step = 0;
 var tutorial_data = [];
-var tutorial_shown = true;
+var tutorial_shown = false;
 
 function init_tutorial(tutorial)
 {

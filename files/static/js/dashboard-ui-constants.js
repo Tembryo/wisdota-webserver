@@ -275,7 +275,7 @@ var skill_constants = {
                 "1": "Ganking with some allies can give you a way to kill enemies even when they are stronger than you on your own.",
                 "-1": "Sometimes it is better if somebody else on your team takes the kill."
             },
-            "fixed_direction": 0,
+            "fixed_direction": 1,
             "format": function(value){return Math.floor(value)+ " kills";},
             "ordering": 4
         },
@@ -286,7 +286,7 @@ var skill_constants = {
                 "1": "?",
                 "-1": "Always try to keep track of how you might die in a fight."
             },
-            "fixed_direction": 0,
+            "fixed_direction": -1,
             "format": function(value){return Math.floor(value)+ " deaths";},
             "ordering": 5
         },
@@ -297,7 +297,7 @@ var skill_constants = {
                 "1": "Sometimes you should make sure to secure the kills in the fight yourself.",
                 "-1": "Sometimes it is better if somebody else on your team takes the kill."
             },
-            "fixed_direction": 0,
+            "fixed_direction": 1,
             "format": function(value){return Math.floor(value)+ " kills";},
             "ordering": 6
         },
@@ -308,7 +308,7 @@ var skill_constants = {
                 "1": "Sometimes sacrifices ofr the team have to be made.",
                 "-1": "Always try to keep track of how you might die in a fight."
             },
-            "fixed_direction": 0,
+            "fixed_direction": -1,
             "format": function(value){return Math.floor(value)+ " deaths";},
             "ordering": 7
         },

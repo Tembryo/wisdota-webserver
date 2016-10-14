@@ -1,3 +1,85 @@
+
+.header {
+
+  padding-top: 20px;
+  padding-bottom: 20px;
+
+}
+.header .navbar {
+  z-index: 3;
+  position: relative;
+  border: 0;
+  background: transparent;
+  margin-bottom:0;
+}
+.header .navbar-collapse.in,.header .navbar-collapse.collapsing  {
+  background: #333 !important;
+}
+.header .navbar-collapse .navbar-nav li {
+  padding: 15px 10px;
+  margin: 0 15px;
+  margin-bottom:0;
+}
+.header .navbar-collapse .navbar-nav li a {
+  color: #f0f0f0;
+  font-variant: small-caps;
+  letter-spacing: 1px;
+  padding: 0 0 4px 0;
+  border-bottom: 1px solid rgba(140, 140, 140, 0.5);
+}
+
+.header .navbar-collapse .navbar-nav li a:hover {
+  color: #e39426;
+  border-bottom: 1px solid rgba(227, 148, 38, 0.5);
+}
+
+@media (max-width: 992px) {
+  .header .navbar-collapse .navbar-nav li {
+    margin: 0 8px 0 0;
+  }
+}
+.header .navbar-collapse .title1,
+.header .navbar-collapse .title2 {
+  color: white;
+  margin-top: 10px;
+}
+@media (max-width: 992px) {
+  .header .navbar-collapse .title1,
+  .header .navbar-collapse .title2 {
+    font-size: 32px;
+  }
+}
+.header .navbar-collapse .title1 {
+  font-weight: 100;
+}
+.header .navbar-collapse .title2 {
+  font-weight: 300;
+}
+.header .navbar-collapse .navbar-right {
+}
+.header .navbar-collapse .navbar-right #steam-sign-up a {
+  background-color: #818080;
+  padding: 0 26px 0 0;
+  border-bottom-left-radius: 30px;
+  border-bottom-right-radius: 30px;
+  border-top-left-radius: 30px;
+  border-top-right-radius: 30px;
+  display: block;
+  width:140px;
+  margin:0 auto;
+}
+.header .navbar-collapse .navbar-right #steam-sign-up a .fa-steam {
+  vertical-align: middle;
+  background-color: black;
+  padding: 4px;
+  font-size: 18px;
+  border-radius: 100%;
+  margin-right: 16px;
+  position: relative;
+  left:-12px;
+}
+
+
 .login-box {
   background-color: #818080;
   padding: 0 26px 0 0;

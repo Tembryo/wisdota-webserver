@@ -7,10 +7,55 @@
     <script type="text/paperscript" src="/static/js/logo.js" canvas="dota-logo"></script>
     <script src="/static/js/slider.js"></script>
 
-    <link rel="stylesheet" type="text/css" href="/static/css/style.css" />
     <link rel="stylesheet" type="text/css" href="/static/css/index.css" />
     <link rel="stylesheet" type="text/css" href="/static/css/slider.css">
 
+<section class="animated-logo">
+
+    <div class="canvas-container">
+        <canvas id="dota-logo" style="position: relative;"></canvas>
+    </div>
+
+    <div class="mobile-title container-fluid">
+        <div class="col-xs-12">
+            <h1 class="title1 text-center">Let Artificial Intelligence</h1>
+            <h1 class="title2 text-center">analyse your Dota game</h1>
+        </div>
+    </div>
+
+    <div id="top-space">
+        <div class="bottom">
+            <div class="container-fluid">
+                <a href="#" id="view-example">View Example</a>
+                <br>
+                <a href="/user" class="btn btn-primary" id="analyse-button"><i class="fa fa-steam"></i>Analyse Myself</a>
+            </div> <!-- container-fluid -->
+        </div> <!-- bottom -->
+    </div>
+    <div id="top-slider">
+        
+        <i class="fa fa-angle-left" id="move-left" aria-hidden="true"></i>
+        <i class="fa fa-angle-right" id="move-right" aria-hidden="true"></i>
+
+        <div id="top-slider-cards">
+            <div class="slider-card" style="background-image:url(/static/img/landing-page/playercard1.png);background-size:cover;background-position:center;"></div>
+
+            <div class="slider-card" style="background-image:url(/static/img/landing-page/playercard2.png);background-size:cover;background-position:center;"></div>
+
+            <div class="slider-card" style="background-image:url(/static/img/landing-page/playercard3.png);background-size:cover;background-position:center;"></div>
+            
+            <div class="slider-card" style="background-image:url(/static/img/landing-page/playercard4.png);background-size:cover;background-position:center;"></div>
+
+            <div class="slider-card" style="background-image:url(/static/img/landing-page/playercard5.png);background-size:cover;background-position:center;"></div>
+            
+            <div class="slider-card" style="background-image:url(/static/img/landing-page/playercard6.png);background-size:cover;background-position:center;"></div>
+            
+            <div class="slider-card slider-card-active" style="background-image:url(/static/img/landing-page/playercard0.png);background-size:cover;background-position:center;"><i class="fa fa-times" id="close-top-slider"></i></div>
+            
+            <div class="slider-card" style="background-image:url(/static/img/landing-page/playercard7.png);background-size:cover;background-position:center;"></div>
+        </div>
+    </div>
+</section>
 
 <article class="intro-content">
     <section class="features">
@@ -193,14 +238,12 @@
             <div class="col-sm-4 col-xs-12 left">
                 <div class="left-container">
                     <div class="row">
-                        <div class="col-xs-6">
+                        <div class="col-xs-12 text-center">
                             <a href="http://www.joinef.com/">
-                                <img src="/static/img/landing-page/logo-ef.png" alt="ef" class="img-responsive">
+                                <img src="/static/img/landing-page/logo-ef.png" alt="ef">
                             </a>
-                        </div>
-                        <div class="col-xs-6">
                             <a href="https://fellowship.ycombinator.com">
-                                <img src="/static/img/landing-page/ycf.png" alt="ycf" id="ycf-logo" class="img-responsive">
+                                <img src="/static/img/landing-page/ycf.png" alt="ycf" id="ycf-logo">
                             </a>
                         </div>
                         <div class="col-xs-12">

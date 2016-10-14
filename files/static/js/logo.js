@@ -52,7 +52,7 @@ setTimeout(function(){
 			mobileScaled = true;
 		}
 
-		$('.intro-header').css('height','430px');
+		$('#top-space').css('height','340px');
 		$('#dota-logo').css({
 			'position': 'relative',
 			'top': '-210px'
@@ -73,7 +73,7 @@ setTimeout(function(){
 		view.scale(2);
 		currentScale *= 2;
 		mobileScaled = false;
-		$('.intro-header').css('height','720px');
+		$('#top-space').css('height','630px');
 		$('#dota-logo').css({
 			'position': 'relative',
 			'top': '-10px'
@@ -635,13 +635,14 @@ function redrawView()
 
 function setBackground()
 {
+    return;
 	if(background != undefined && typeof background.remove == 'function') background.remove();
  
 	background = new Path.Rectangle({
 	    point: [view.bounds.topLeft.x,view.bounds.topLeft.y],
 	    size: [view.size.width, view.size.height],
 	    strokeWidth: 0,
-	    fillColor: '#574E53'
+	    fillColor: '#FFFFFF'
 	});
 
 	background.sendToBack();

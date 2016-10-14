@@ -155,6 +155,8 @@ router.route("/get-player-matches")
     .get(authentication.ensureAuthenticated,
         function(req, res)
         {
+            var profiling_marker_start = process.hrtime();
+
             var window_string = "LIMIT 20 OFFSET 0";
             if(req.query.hasOwnProperty("start") && req.query.hasOwnProperty("end"))
             {
@@ -173,12 +175,12 @@ router.route("/get-player-matches")
 
             if(req.query.hasOwnProperty("mode") && req.query.mode === "all")
                 window_string = "";
-
+            var profiling_db_marker_start = process.hrtime();
             async.waterfall(
                 [
                     database.generateQueryFunction(
                         "SELECT umh.match_id, umh.data as history_data, EXISTS(SELECT id FROM MatchRetrievalRequests where id = umh.match_id) as requested, "+
-                            "COALESCE( (SELECT MAX(ps.label) FROM ProcessingStatuses ps, Replayfiles rf where (rf.match_id = umh.match_id OR rf.upload_filename=umh.match_id::text) AND ps.id=rf.processing_status),"+
+                            "COALESCE( (SELECT MAX(ps.label) FROM ProcessingStatuses ps, Replayfiles rf WHERE (rf.match_id = umh.match_id OR rf.upload_filename=umh.match_id::text) AND ps.id=rf.processing_status),"+
                                         "'unknown') AS processing_status, "+
                             "COALESCE( (SELECT mrs.label FROM MatchRetrievalStatuses mrs, MatchRetrievalRequests mrr where mrr.id = umh.match_id AND mrs.id=mrr.retrieval_status),"+
                                         "'unknown') AS retrieval_status, "+
@@ -198,6 +200,11 @@ router.route("/get-player-matches")
                             [req.user["id"]]),
                     function(results, callback)
                     {
+                        var profiling_db_result = process.hrtime(profiling_db_marker_start);
+                        var profiling_db_result_ms = profiling_db_result[0] * 1000 + Math.floor(profiling_db_result[1]/1000000);
+                        //console.log(profiling_db_result);
+                        database.query("INSERT INTO ProfilingEntries (time, block_duration, block_info) VALUES (now(), $1, $2);", [profiling_db_result_ms, "{\"block-name\": \"get-player-matches-dbcall\"}"], function(){});
+
                         var response = [];
                         for(var i = 0; i < results.rowCount; i++)
                         {
@@ -312,6 +319,11 @@ router.route("/get-player-matches")
                         logging.error({"message": "error getting player matches", "err":err, "response": response});
                     }
                     res.json(response);
+
+                    var profiling_result = process.hrtime(profiling_marker_start);
+                    //console.log(profiling_result);
+                    var profiling_result_ms = profiling_result[0] * 1000 + Math.floor(profiling_result[1]/1000000);
+                    database.query("INSERT INTO ProfilingEntries (time, block_duration, block_info) VALUES (now(), $1, $2);", [profiling_result_ms, "{\"block-name\": \"get-player-matches-all\"}"], function(){});
                 }
             );
         }
@@ -999,35 +1011,6 @@ router.route('/admin-find-user/:name')
             async.waterfall(
                 [
                     database.generateQueryFunction("SELECT id, name FROM Users WHERE name=$1;",[req.params.name])
-                ],
-                function(err, result)
-                {
-                    //console.log(result);
-                    if(err)
-                    {
-                        logging.error({"message": "error find user "+req.params.name, "err": err, "result": result});
-                        
-                        res.json({"users":[]});
-                    }
-                    else
-                        res.json({"users":result.rows});
-                }
-            );
-        }
-    );
-
-router.route('/admin-user-stats')
-    .get(authentication.ensureAuthenticated,
-        authentication.ensureAdmin,
-        function(req, res) 
-        {
-            async.waterfall(
-                [
-                    database.generateQueryFunction("SELECT data->>'user', extract(epoch from time) as time FROM Events WHERE event_type=1 AND (data->'user' IS NOT NULL) ORDER BY time;",[req.params.name]),
-                    function(results, callback)
-                    {
-
-                    }
                 ],
                 function(err, result)
                 {

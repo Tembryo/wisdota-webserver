@@ -40,9 +40,10 @@ var selected_match = null;
 var selected_match_data = null;
 var selected_skill = null;
 
-var boxSize = 300;   // size of the SVG container
-var xOffset = boxSize/2;
-var yOffset = boxSize/2;
+var boxWidth = 300;   // size of the SVG container
+var boxHeight = 320;   // size of the SVG container
+var xOffset = boxWidth/2;
+var yOffset = boxHeight/2;
 var inner_radius = 11;
 var n_rings = 8;
 var ring_step = 9;
@@ -121,8 +122,8 @@ function createCardBase()
 {
     // make SVG container
     var canvas = d3.select("#polygon-canvas")
-                    .attr("height",boxSize)
-                    .attr("width",boxSize);
+                    .attr("height",boxHeight)
+                    .attr("width",boxWidth);
 
     //background
     canvas.append("rect")
@@ -1089,25 +1090,13 @@ function renderHeroImages(dataPoint) {
     }
 }
 
+var history_update_interval = 60000;
 var history_job_check_interval = 5000;
 
 $(document).ready(function(){
     initPage();
-    d3.json("/api/update-history", 
-        function(data)
-        {
-            console.log("update history", data);
-            if(data["result"] === "success")
-            {
-                console.log("checking");
-                setTimeout(
-                    function(){
-                        checkHistoryJob(data["job-id"]);
-                    },
-                    history_job_check_interval);
-            }
-        }
-    );
+
+    updateMatchHistory();
     reloadMatches(load);
 
     loadSettings();
@@ -1132,6 +1121,36 @@ $("#queue-matches-button" ).click(function()
             alert("Sorry, failure queueing matches. Leave us a message and we will look into it.");
     });
 });
+
+function updateMatchHistory()
+{
+    d3.json("/api/update-history", 
+        function(data)
+        {
+            if(data["result"] === "success")
+            {
+                console.log("checking");
+                setTimeout(
+                    function(){
+                        checkHistoryJob(data["job-id"]);
+                    },
+                    history_job_check_interval
+                );
+
+                setTimeout(
+                    function(){
+                        updateMatchHistory();
+                    },
+                    history_update_interval
+                );
+            }
+            else
+            {
+                console.log(data);
+            }
+        }
+    );
+}
 
 function checkHistoryJob(job_id)
 {

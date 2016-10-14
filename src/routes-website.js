@@ -83,8 +83,32 @@ router.get('/plus', function(req, res)
 
 router.get('/about', function(req, res)
 {
-    var data = collectTemplatingData(req);
-    res.render("pages/about.ejs", data);
+
+    var locals = {};
+        async.waterfall(
+            [
+                database.generateQueryFunction(
+                    "SELECT display_name, level FROM Subscribers ORDER BY level DESC;",[]),
+                function(results, callback)
+                {
+                    callback(null, results.rows);
+                }
+            ],
+            function(err, results)
+            {
+                console.log(results);
+                if(err)
+                    console.log(err, results);
+                
+                var data = collectTemplatingData(req);
+
+                data["subscribers"] = results;
+                res.render("pages/about.ejs", data);
+            }
+        );
+
+
+
 });
 
 router.get('/faq', function(req, res)
@@ -139,10 +163,27 @@ router.get('/user',
                 }
                 //console.log(data);
 
-                res.render("pages/dashboard.ejs", data);
+                callback();
+            },
+            database.generateQueryFunction(
+                "SELECT level FROM subscribers WHERE user_id=$1;",[req.user["id"]]),
+            function(result, callback){
+                data["subscriber_level"] = -1;
+                if(result.rowCount > 0)
+                {
+                    console.log("yo sub", result.rowCount, result.rows);
+                    data["subscriber_level"] = result.rows[0]["level"];
+                }
                 callback();
             }
-        ]);
+        ],
+        function(err, results)
+        {
+            if(err)
+                console.log("rendering user page failed", err, results);
+
+            res.render("pages/dashboard.ejs", data);
+        });
     }
 );
 
@@ -193,8 +234,6 @@ router.get('/result/:result_id', function(req, res)
 
         }
     );
-
-    
 });
 
 router.get('/match/:match_id', function(req, res)
