@@ -117,6 +117,12 @@ router.get('/faq', function(req, res)
     res.render("pages/faq.ejs", data);
 });
 
+router.get('/match-reports', function(req, res)
+{
+    var data = collectTemplatingData(req);
+    res.render("pages/match-reports.ejs", data);
+});
+
 
 router.get('/user',
     authentication.ensureAuthenticated,

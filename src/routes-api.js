@@ -3,7 +3,8 @@ var	express			= require("express"),
     fs              = require("fs"),
     formidable      = require('formidable'),
     fs_extra        = require('fs-extra'),
-    shortid         = require('shortid');
+    shortid         = require('shortid'),
+    child_process   = require("child_process");
 
 var	authentication  = require("./routes-auth.js");
 
@@ -1186,13 +1187,58 @@ router.route("/download/:match_id")
                         }    
                         else
                         {
-                            callback(null, results.rows[0]["file"]);
+                            var local_filename = config.shared+"/"+results.rows[0].file;
+                            fs.stat(local_filename, function(err, stat)
+                            {
+                                if(err == null)
+                                {
+                                    callback(null, local_filename);
+                                }
+                                else if(err.code == 'ENOENT')
+                                {
+                                    storage.retrieve(results.rows[0].file, 
+                                        function(err, local_filename)
+                                        {
+                                            if(err)
+                                            {
+                                                callback(err)
+                                                return;
+                                            }
+
+                                            var bzip_extension = ".bz2";
+                                            var dem_extension = ".dem";
+                                            if(local_filename.substr(-bzip_extension.length) === bzip_extension)
+                                            {
+                                                child_process.exec("bzip2 -d -f "+local_filename, function(err, stdout, stderr)
+                                                {
+                                                    var decompressed_filename = local_filename.substr(0, local_filename.length - bzip_extension.length);
+                                                    logging.log({"message":"decompressed "+decompressed_filename, "matchid": match_id});
+                                                    callback(err, decompressed_filename)
+                                                });
+                                            }
+                                            else if(local_filename.substr(-dem_extension.length) === dem_extension)
+                                            {
+                                                callback(null, local_filename);
+                                            }
+                                            else
+                                            {
+                                                callback("Bad replay filename "+local_filename, local_filename);
+                                            }
+                                        }
+                                    );
+                                }
+                                else
+                                {
+                                    callback(err);
+                                }
+                            });
                         }
-                    },
-                    function(result, callback)
+                    }
+                    ,
+                    function(decompressed_filename, callback)
                     {
                         res.download(
-                            config.shared+result,
+                            decompressed_filename,
                             match_id+".dem",
                             callback);
                     }
@@ -1206,6 +1252,7 @@ router.route("/download/:match_id")
                             "result": "error",
                             "message": err
                             };
+                        //res.json(error_result);
                     }
                     else
                     {
