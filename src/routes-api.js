@@ -340,7 +340,7 @@ router.route("/queue-matches")
                 [
                     database.generateQueryFunction("INSERT INTO MatchRetrievalRequests(id, retrieval_status, requester_id) "+
                         "(SELECT umh.match_id, (SELECT mrs.id FROM MatchRetrievalStatuses mrs where mrs.label=$2), $1 "+
-                        "FROM UserMatchHistory umh WHERE umh.user_id = $1 AND to_timestamp((umh.data->>'start_time')::int) > current_timestamp - interval '7 days' AND NOT EXISTS (SELECT mrs.id FROM MatchRetrievalRequests mrs where mrs.id = umh.match_id) ) "+
+                        "FROM UserMatchHistory umh WHERE umh.user_id = $1 AND to_timestamp((umh.data->>'start_time')::int) > current_timestamp - interval '30 days' AND NOT EXISTS (SELECT mrs.id FROM MatchRetrievalRequests mrs where mrs.id = umh.match_id) ) "+
                         "RETURNING id;",
                             [req.user["id"], "requested"]),
                     function(results, callback)
@@ -1170,8 +1170,7 @@ router.route("/stats")
     );
 
 router.route("/download/:match_id")
-    .get(authentication.ensureAuthenticated,
-        function(req, res)
+    .get(function(req, res)
         {
             var match_id = req.params.match_id;
             async.waterfall(
@@ -1181,13 +1180,18 @@ router.route("/download/:match_id")
                         [match_id]),
                     function(results, callback)
                     {
-                        if(results.rowCount != 1)
+                        if(results.rowCount < 1)
                         {
                             callback("couldnt find", results);
                         }    
                         else
                         {
                             var local_filename = config.shared+"/"+results.rows[0].file;
+                            var bzip_extension = ".bz2";
+                            if(local_filename.substr(-bzip_extension.length) === bzip_extension)
+                            {
+                                local_filename = local_filename.substr(0, local_filename.length-bzip_extension.length);
+                            }
                             fs.stat(local_filename, function(err, stat)
                             {
                                 if(err == null)
@@ -1204,7 +1208,7 @@ router.route("/download/:match_id")
                                                 callback(err)
                                                 return;
                                             }
-
+                                            console.log("got from cloud");
                                             var bzip_extension = ".bz2";
                                             var dem_extension = ".dem";
                                             if(local_filename.substr(-bzip_extension.length) === bzip_extension)
@@ -1234,16 +1238,8 @@ router.route("/download/:match_id")
                             });
                         }
                     }
-                    ,
-                    function(decompressed_filename, callback)
-                    {
-                        res.download(
-                            decompressed_filename,
-                            match_id+".dem",
-                            callback);
-                    }
                 ],
-                function(err)
+                function(err, decompressed_filename)
                 {
                     if(err)
                     {
@@ -1252,11 +1248,15 @@ router.route("/download/:match_id")
                             "result": "error",
                             "message": err
                             };
-                        //res.json(error_result);
+                        console.log(err)
+                        res.json(error_result);
                     }
                     else
                     {
-                        logging.log("download success"+match_id);
+                        logging.log("downloading "+match_id);
+                        res.download(
+                            decompressed_filename,
+                            match_id+".dem");
                     }
                 }
             );

@@ -292,13 +292,9 @@ margin-top: 10px;
 font-family: 'Roboto' !important;
 }
 
-.title1 {
-  font-weight: 100;
-}
-
-
-.title2 {
+.title {
   font-weight: 300;
+  font-size: 50px;
 }
 
 #bs-example-navbar-collapse-1

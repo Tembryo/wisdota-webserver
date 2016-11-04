@@ -6,8 +6,7 @@
   position: absolute;
   left: 50%;
   margin-left: -425px;
-  top: 50%;
-  margin-top: -215px;
+  margin-top: -600px;
   z-index: 1000;
   -webkit-transition: all .3s ease;
   -moz-transition: all .3s ease;

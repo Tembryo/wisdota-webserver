@@ -19,19 +19,21 @@
             <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                 <div class="row">
 
-                    <div class="col-sm-5 col-xs-12">
-                        <ul class="nav navbar-nav">
-                            <% if(! (typeof page !== 'undefined' && page === 'index')) { %> <li><a href="/">Home</a></li> <% } %>
+                    <div class="col-sm-7 col-xs-12">
+                        <ul class="nav navbar-nav navigation-left">
+                            <% if(page !== 'index') { %> <li><a href="/">Home</a></li> <% } %>
+                            <li><a href="/match-reports" id="match-reports">Match Reports!</a></li>
                             <li><a href="/faq">FAQ</a></li>
                             <li><a href="/about">About Us</a></li>
                             <li><a href="http://www.patreon.com/wisdota">Support Us</a></li>
                         </ul> <!-- nav navbar-nav -->
                     </div>
 
-                    <div class="col-sm-3 col-xs-12"></div>
+                    <!--<div class="col-sm-2 col-xs-12">
+                    </div>-->
 
-                    <div class="col-sm-4 col-xs-12">
-                        <ul class="nav navbar-nav navbar-right">
+                    <div class="col-sm-5 col-xs-12">
+                        <ul class="nav navbar-nav navbar-right navigation-right">
                             <li>
                                 <div class="login-box">
                                     <% if (user) { %>

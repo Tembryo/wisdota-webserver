@@ -1,8 +1,8 @@
 
 .header {
 
-  padding-top: 20px;
-  padding-bottom: 20px;
+  padding-top: 10px;
+  padding-bottom: 10px;
 
 }
 .header .navbar {
@@ -109,4 +109,24 @@
   border: 2px solid white;
   position: relative;
   left:-15px;
+}
+
+#match-reports{
+  color: #f1b72a;
+  font-weight: 300;
+}
+
+#match-reports:hover{
+  color: #e39426;
+  font-weight: 300;
+}
+
+.navigation-left{
+  text-align: left;
+  margin-left: 20px;
+}
+
+.navigation-right{
+    text-align: right;
+    margin-right: 20px;
 }
